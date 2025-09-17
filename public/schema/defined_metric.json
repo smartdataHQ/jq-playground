@@ -1,0 +1,79 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://contextsuite.com/schemas/defined_metric_schema.json",
+  "title": "DefinedMetric",
+  "description": "Schema for a metric definition within a time series.",
+  "type": "object",
+  "properties": {
+    "gid_url": {
+      "description": "RDF URL for the metric definition.",
+      "type": "string",
+      "format": "uri"
+    },
+    "gid": {
+      "description": "Unique GID for the metric definition.",
+      "type": "string",
+      "format": "uuid"
+    },
+    "category": {
+      "description": "The category of the metric.",
+      "type": "string"
+    },
+    "label": {
+      "description": "The full human-readable name of the metric.",
+      "type": "string"
+    },
+    "slug": {
+      "description": "The slug of the metric, used as a key in metrics dictionaries.",
+      "type": "string"
+    },
+    "uom": {
+      "description": "The unit of measure for the metric. Should be a valid UOM code (e.g., from UN CEFACT list, like 'KGM' for kilogram).",
+      "type": "string"
+    },
+    "currency": {
+      "description": "The currency of the metric if applicable (e.g., USD).",
+      "type": ["null", "string"]
+    },
+    "adj_type": {
+      "description": "Adjustment type for the metric if it is a monetary value.",
+      "type": ["null", "string"],
+      "enum": [null, "NotAdjusted", "Adjusted", "Obfuscated", "Unknown"]
+    },
+    "adj_date": {
+      "description": "Date of adjustment if the monetary value is adjusted.",
+      "type": ["null", "string"],
+      "format": "date"
+    },
+    "wid": {
+      "description": "WikiData ID for what is being measured.",
+      "type": ["null", "string"]
+    },
+    "concept_id": {
+      "description": "Concept ID from a knowledge graph.",
+      "type": ["null", "string"]
+    },
+    "synset_id": {
+      "description": "Synset ID from a lexical database.",
+      "type": ["null", "string"]
+    },
+    "properties": {
+      "description": "Additional properties for the metric definition.",
+      "type": ["null", "object"],
+      "additionalProperties": { "type": "string" }
+    },
+    "agg": {
+      "description": "Default aggregation type for the metric.",
+      "type": ["null", "string"],
+      "enum": [null, "Sum", "Avg", "Min", "Max", "Custom"]
+    }
+  },
+  "required": [
+    "gid_url",
+    "gid",
+    "category",
+    "label",
+    "slug",
+    "uom"
+  ]
+}

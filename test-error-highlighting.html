@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JQ Error Highlighting Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        h1 {
+            color: #333;
+        }
+        p {
+            margin-bottom: 20px;
+        }
+        .instructions {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+        .instructions ol {
+            margin-top: 10px;
+            padding-left: 20px;
+        }
+        .instructions li {
+            margin-bottom: 10px;
+        }
+        .code {
+            font-family: monospace;
+            background-color: #f5f5f5;
+            padding: 2px 4px;
+            border-radius: 3px;
+        }
+        .highlight {
+            background-color: #ffffcc;
+            padding: 2px;
+        }
+    </style>
+</head>
+<body>
+    <h1>JQ Error Highlighting Test</h1>
+    
+    <div class="instructions">
+        <p><strong>Instructions:</strong></p>
+        <ol>
+            <li>Make sure both the backend server and frontend application are running:
+                <ul>
+                    <li>Backend: <span class="code">cd server && npm start</span></li>
+                    <li>Frontend: <span class="code">npm run dev</span></li>
+                </ul>
+            </li>
+            <li>Open the JQ Playground application in your browser (usually at <span class="code">http://localhost:5174</span>)</li>
+            <li>Open the browser's developer console (F12 or right-click > Inspect > Console)</li>
+            <li>Enter a valid JSON in the left panel (or use the default)</li>
+            <li>Enter one of the following JQ queries with errors in the middle panel:</li>
+        </ol>
+        
+        <p><strong>Test Queries with Errors:</strong></p>
+        <ul>
+            <li><span class="code">.name + [</span> - Syntax error (unclosed bracket)</li>
+            <li><span class="code">.name + 5</span> - Type error (can't add string and number)</li>
+            <li><span class="code">if .age > 30 then .name</span> - Syntax error (incomplete if statement)</li>
+        </ul>
+        
+        <p><strong>Expected Behavior:</strong></p>
+        <ul>
+            <li>You should see error messages in the console from the JqEditor component</li>
+            <li>The error should be highlighted in the JQ editor with a red wavy underline</li>
+            <li>Hovering over the error should show the error message</li>
+            <li>You should see an error marker in the minimap and scrollbar</li>
+            <li>When you fix the error, the highlighting and markers should disappear</li>
+        </ul>
+    </div>
+    
+    <p><strong>Recent Improvements:</strong></p>
+    <ul>
+        <li>Added Monaco editor's built-in error markers for better visibility</li>
+        <li>Enhanced CSS styles with !important to ensure they're not overridden</li>
+        <li>Added code to clear markers when errors are fixed</li>
+        <li>Added debug logging to help diagnose issues</li>
+    </ul>
+    
+    <p>If the error highlighting is not working, check the console for any error messages or warnings. Look for messages starting with 🔍, ⚠️, 📍, 🎨, or ✅ to see the debug logs from the error highlighting useEffect.</p>
+    
+    <p>If you see the debug logs but the error is not highlighted, there might be an issue with how the error position information is being used to create the decoration.</p>
+    
+    <p>If you don't see any debug logs, there might be an issue with how the error details are being passed to the JqEditor component.</p>
+</body>
+</html>

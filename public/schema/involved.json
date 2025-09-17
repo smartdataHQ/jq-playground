@@ -1,0 +1,44 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://contextsuite.com/schemas/involved_schema.json",
+  "title": "Involved Entity",
+  "description": "Schema for an entity involved in a semantic event.",
+  "type": "object",
+  "properties": {
+    "label": {
+      "description": "Optional label for this involvement instance or the entity it points to.",
+      "type": ["null", "string"]
+    },
+    "role": {
+      "description": "Role of the entity in the event (e.g., 'Supplier', 'Buyer', 'Victim', 'HomeTeam'). Should be capitalized.",
+      "type": "string"
+    },
+    "entity_type": {
+      "description": "Type of the entity involved (e.g., 'Person', 'Organization', 'LegalEntity'). Should be a capitalized entity name.",
+      "type": "string"
+    },
+    "entity_gid": {
+      "description": "The Graph UUID (GID) of the involved entity, if known. Entity GIDs are ContextSuite native identifiers. Use the 'id' field for other types of identifiers.",
+      "type": ["null", "string"],
+      "format": "uuid"
+    },
+    "id": {
+      "description": "The actual identifier string for the involved entity.",
+      "type": ["null", "string"]
+    },
+    "id_type": {
+      "description": "Indicates the type or source of the 'id' (e.g., 'Zendesk ID', 'Stripe ID', or your own organization's name if the ID is internal).",
+      "type": "string"
+    },
+    "capacity": {
+      "description": "The capacity or extent of the entity's involvement in the event. If fractional, this represents the fraction (e.g., 0.5 for half involvement of a person).",
+      "type": ["null", "number"],
+      "format": "double"
+    }
+  },
+  "required": [
+    "role",
+    "entity_type",
+    "id_type"
+  ]
+}

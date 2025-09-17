@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://contextsuite.com/schemas/user_agent_data_schema.json",
+  "title": "User Agent Data",
+  "description": "Schema for user agent client hints data (brand and version), part of UserAgent.",
+  "type": "object",
+  "properties": {
+    "brand": { "type": "string", "description": "The brand reported by User-Agent Client Hints (e.g., 'Chromium')." },
+    "version": { "type": "string", "description": "The version of the user agent brand reported by Client Hints." }
+  },
+  "required": [
+    "brand",
+    "version"
+  ],
+  "additionalProperties": false
+}

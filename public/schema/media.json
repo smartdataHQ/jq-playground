@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://contextsuite.com/schemas/media_schema.json",
+  "title": "Media",
+  "description": "Schema for a media item associated with an entity.",
+  "type": "object",
+  "properties": {
+    "media_type": {
+      "description": "Type of the media (e.g., Image, Video, Audio).",
+      "type": "string"
+    },
+    "type": {
+      "description": "Specific type of the media item (e.g., Poster, Thumbnail).",
+      "type": ["null", "string"]
+    },
+    "sub_type": {
+      "description": "Sub-type for further classification (e.g., 'Program', 'Season', 'Episode').",
+      "type": ["null", "string"]
+    },
+    "url": {
+      "description": "The URL of the media item.",
+      "type": "string",
+      "format": "uri"
+    },
+    "language": {
+      "description": "The primary language of the media.",
+      "type": ["null", "string"]
+    },
+    "aspect_ratio": {
+      "description": "The aspect ratio of the media (e.g., '16:9').",
+      "type": ["null", "string"]
+    }
+  },
+  "required": [
+    "media_type",
+    "url"
+  ]
+}

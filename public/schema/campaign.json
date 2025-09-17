@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://contextsuite.com/schemas/campaign_schema.json",
+  "title": "Campaign",
+  "description": "Schema for marketing campaign information.",
+  "type": "object",
+  "properties": {
+    "campaign": { "type": "string", "description": "The campaign name (e.g. \"summer\")." },
+    "source": { "type": "string", "description": "The source of the campaign (e.g. \"google\")." },
+    "medium": { "type": "string", "description": "The medium of the campaign (e.g. \"cpc\")." },
+    "term": { "type": "string", "description": "The term associated with the campaign (e.g. \"beach\")." },
+    "content": { "type": "string", "description": "The content of the campaign (e.g. \"ad1\")." }
+  },
+  "required": [
+    "campaign",
+    "source",
+    "medium",
+    "term",
+    "content"
+  ],
+  "additionalProperties": false
+}

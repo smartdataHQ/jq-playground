@@ -1,0 +1,75 @@
+# Test YAML file with various data types and structures
+---
+# Simple key-value pairs
+name: John Doe
+age: 30
+isActive: true
+salary: 75000.50
+null_value: null
+
+# Nested objects
+address:
+  street: 123 Main St
+  city: Anytown
+  state: CA
+  zip: 12345
+  country: USA
+
+# Arrays
+hobbies:
+  - Reading
+  - Hiking
+  - Coding
+  - Swimming
+
+# Array of objects
+contacts:
+  - name: Jane Smith
+    relation: Friend
+    phone: 555-1234
+  - name: Bob Johnson
+    relation: Colleague
+    phone: 555-5678
+    email: bob@example.com
+
+# Complex nested structure
+company:
+  name: Acme Inc.
+  founded: 1985
+  locations:
+    - name: Headquarters
+      address:
+        city: San Francisco
+        state: CA
+    - name: Branch Office
+      address:
+        city: New York
+        state: NY
+  departments:
+    engineering:
+      headcount: 50
+      projects:
+        - name: Project A
+          budget: 100000
+        - name: Project B
+          budget: 250000
+    marketing:
+      headcount: 25
+      campaigns:
+        - Q1_2023
+        - Q2_2023
+
+# Special characters and multiline text
+description: |
+  This is a multiline text
+  that spans multiple lines
+  and preserves line breaks.
+
+notes: >
+  This is also a multiline text
+  but it will be folded into a single line
+  with spaces between each line.
+
+# Special YAML features
+timestamp: 2023-07-15T12:30:45Z
+binary_data: !!binary R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7

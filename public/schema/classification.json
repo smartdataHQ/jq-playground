@@ -1,0 +1,45 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://contextsuite.com/schemas/classification_schema.json",
+  "title": "Classification",
+  "description": "Schema for classification information, usable for entities and events.",
+  "type": "object",
+  "properties": {
+    "type": {
+      "description": "The type of classification. For semantic events, this can be 'Intent', 'Intent Category', 'Category', 'Subcategory', 'Tag', 'Segmentation', 'Age Group', 'Inbox', 'Keyword', 'Priority', 'Other', often mapped from an internal Enum. For entities, an example is 'event category->subcategory'.",
+      "type": "string"
+    },
+    "value": {
+      "description": "The value of the classification (e.g., 'Sports->Football', 'Order Inquiry').",
+      "type": "string"
+    },
+    "babelnet_id": {
+      "description": "BabelNet ID for the classification concept, used to translate and associate the classification with other systems (primarily for entities).",
+      "type": ["null", "string"]
+    },
+    "reasoning": {
+      "description": "The reasoning behind the classification (primarily for semantic events).",
+      "type": ["null", "string"]
+    },
+    "score": {
+      "description": "The score of the classification (primarily for semantic events).",
+      "type": ["null", "number"],
+      "format": "double"
+    },
+    "confidence": {
+      "description": "The confidence of the classification from a model (primarily for semantic events).",
+      "type": ["null", "number"],
+      "format": "double"
+    },
+    "weight": {
+      "description": "The relevance of the classification.",
+      "type": "number",
+      "format": "double",
+      "default": 0.0
+    }
+  },
+  "required": [
+    "type",
+    "value"
+  ]
+}

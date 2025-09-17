@@ -1,0 +1,131 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://contextsuite.com/schemas/commerce_schema.json",
+  "title": "Commerce",
+  "description": "Schema for commerce-related information in a semantic event.",
+  "type": "object",
+  "properties": {
+    "details": {
+      "description": "Other properties of the commerce event that cannot be mapped to the schema or have complex data types.",
+      "type": ["null", "string"]
+    },
+    "checkout_id": {
+      "description": "Unique ID for the checkout.",
+      "type": ["null", "string"]
+    },
+    "order_id": {
+      "description": "Unique ID for the order.",
+      "type": ["null", "string"]
+    },
+    "cart_id": {
+      "description": "Unique ID for the cart.",
+      "type": ["null", "string"]
+    },
+    "employee_id": {
+      "description": "Unique ID for the employee working the terminal/register.",
+      "type": "string"
+    },
+    "external_order_id": {
+      "description": "Unique External ID for the order.",
+      "type": ["null", "string"]
+    },
+    "terminal_id": {
+      "description": "Unique External ID for the terminal used for the transaction.",
+      "type": "string"
+    },
+    "affiliation_id": {
+      "description": "Unique ID for the affiliation.",
+      "type": "string"
+    },
+    "affiliation": {
+      "description": "Store or affiliation from which this transaction occurred (e.g., Google Store).",
+      "type": "string"
+    },
+    "agent": {
+      "description": "The Agent responsible for the sale.",
+      "type": "string"
+    },
+    "agent_id": {
+      "description": "The ID of the Agent responsible for the sale.",
+      "type": "string"
+    },
+    "sold_location": {
+      "description": "The location where the sale occurred.",
+      "type": "string"
+    },
+    "sold_location_id": {
+      "description": "The ID of the location where the sale occurred.",
+      "type": "string"
+    },
+    "business_day": {
+      "description": "The business day of the transaction.",
+      "type": "string",
+      "format": "date"
+    },
+    "revenue": {
+      "description": "Total gross revenue for the transaction. Note: Segment's spec often uses 'total' for this concept if 'revenue' might only include product revenue; check specific event for usage.",
+      "type": ["null", "number"],
+      "format": "double"
+    },
+    "tax": {
+      "description": "Total tax amount for the transaction.",
+      "type": ["null", "number"],
+      "format": "double"
+    },
+    "discount": {
+      "description": "Total discount amount for the transaction.",
+      "type": ["null", "number"],
+      "format": "double"
+    },
+    "cogs": {
+      "description": "Total cost of goods sold for the transaction.",
+      "type": ["null", "number"],
+      "format": "double"
+    },
+    "commission": {
+      "description": "Total commission amount for the transaction.",
+      "type": ["null", "number"],
+      "format": "double"
+    },
+    "currency": {
+      "description": "Currency code associated with the transaction (e.g., 'USD').",
+      "type": "string"
+    },
+    "exchange_rate": {
+      "description": "Currency exchange rate associated with the transaction.",
+      "type": "number",
+      "format": "float",
+      "default": 1.0
+    },
+    "coupon": {
+      "description": "Transaction coupon redeemed with the transaction (e.g., 'SUMMER20').",
+      "type": "string"
+    },
+    "payment_type": {
+      "description": "Type of payment (e.g., 'Card', 'Paypal', 'Cash').",
+      "type": "string"
+    },
+    "payment_sub_type": {
+      "description": "Subtype of payment (e.g., 'Visa', 'Mastercard').",
+      "type": "string"
+    },
+    "payment_details": {
+      "description": "Details of the payment (e.g., last 4 digits of a credit card).",
+      "type": ["null", "string"]
+    },
+    "products": {
+      "type": ["null", "array"],
+      "items": { "$ref": "product.json"}
+    }
+  },
+  "required": [
+    "affiliation_id",
+    "affiliation",
+    "sold_location",
+    "sold_location_id",
+    "business_day",
+    "currency",
+    "payment_type"
+  ],
+  "additionalProperties": false
+}

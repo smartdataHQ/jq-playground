@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://contextsuite.com/schemas/analysis_schema.json",
+  "title": "Analysis",
+  "description": "Schema for internal cost or processing analysis related to an event. Not for general client use.",
+  "type": "object",
+  "properties": {
+    "item": { "type": "string", "description": "The item analyzed (e.g., a specific AI model or service)." },
+    "provider": { "type": "string", "description": "The provider of the analyzed item." },
+    "variant": { "type": "string", "description": "The variant of the item used (e.g., model size)." },
+    "processing_time": { "type": ["null", "number"], "format": "double", "description": "Time taken for processing in seconds." },
+    "token_in": { "type": ["null", "integer"], "description": "Number of input tokens processed." },
+    "token_out": { "type": ["null", "integer"], "description": "Number of output tokens generated." },
+    "currency": { "type": "string", "description": "Currency of the amount (e.g., 'USD')." },
+    "amount": { "type": ["null", "number"], "format": "double", "description": "Cost associated with this analysis item." }
+  },
+  "required": [
+    "item",
+    "provider",
+    "variant",
+    "currency"
+  ],
+  "additionalProperties": false
+}

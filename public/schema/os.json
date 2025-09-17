@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://contextsuite.com/schemas/os_schema.json",
+  "title": "Operating System",
+  "description": "Schema for operating system information.",
+  "type": "object",
+  "properties": {
+    "name": { "type": "string", "description": "The name of the OS (e.g. \"iOS\")." },
+    "version": { "type": "string", "description": "The version of the OS (e.g. \"9.1\")." }
+  },
+  "required": [
+    "name",
+    "version"
+  ],
+  "additionalProperties": false
+}

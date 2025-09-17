@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://contextsuite.com/schemas/id_schema.json",
+  "title": "Entity Identifier",
+  "description": "Schema for an identifier associated with an entity.",
+  "type": "object",
+  "properties": {
+    "label": {
+      "description": "Optional label for this identifier instance or the entity it points to.",
+      "type": ["null", "string"]
+    },
+    "role": {
+      "description": "Role of the identified entity in relation to the parent entity/event.",
+      "type": ["null", "string"]
+    },
+    "entity_type": {
+      "description": "Type of the entity being identified.",
+      "type": ["null", "string"]
+    },
+    "entity_gid": {
+      "description": "Graph UUID of the identified entity, if known.",
+      "type": ["null", "string"],
+      "format": "uuid"
+    },
+    "id": {
+      "description": "The actual identifier string.",
+      "type": ["null", "string"]
+    },
+    "id_type": {
+      "description": "The type or source of the identifier (e.g., ' বিক্রেতা ID', 'Customer ID').",
+      "type": ["null", "string"]
+    },
+    "capacity": {
+      "description": "Capacity related to this identifier's role or involvement.",
+      "type": ["null", "number"],
+      "format": "float"
+    }
+  }
+}

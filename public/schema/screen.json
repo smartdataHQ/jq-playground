@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://contextsuite.com/schemas/screen_schema.json",
+  "title": "Screen",
+  "description": "Schema for screen information.",
+  "type": ["null", "object"],
+  "properties": {
+    "density": { "type": ["null", "integer"], "description": "The density of the screen (e.g., 2)." },
+    "height": { "type": ["null", "integer"], "description": "The height of the screen in pixels (e.g., 568)." },
+    "width": { "type": ["null", "integer"], "description": "The width of the screen in pixels (e.g., 320)." },
+    "inner_height": { "type": ["null", "integer"], "description": "The inner height of the screen viewport in pixels (e.g., 568)." },
+    "inner_width": { "type": ["null", "integer"], "description": "The inner width of the screen viewport in pixels (e.g., 320)." }
+  },
+  "additionalProperties": false
+}

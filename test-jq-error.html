@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JQ Error Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        pre {
+            background-color: #f5f5f5;
+            padding: 10px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+        button {
+            padding: 10px 15px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-bottom: 20px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .error {
+            color: red;
+        }
+        .success {
+            color: green;
+        }
+    </style>
+</head>
+<body>
+    <h1>JQ Error Test</h1>
+    <p>This page tests if the JQ server correctly extracts and returns error position information.</p>
+    
+    <button id="testButton">Test JQ Error</button>
+    
+    <h2>Response:</h2>
+    <pre id="response">Click the button to test...</pre>
+    
+    <h2>Error Details:</h2>
+    <pre id="errorDetails">None yet...</pre>
+    
+    <script>
+        document.getElementById('testButton').addEventListener('click', async () => {
+            const responseElement = document.getElementById('response');
+            const errorDetailsElement = document.getElementById('errorDetails');
+            
+            // Test data
+            const testData = {
+                name: "John Doe",
+                age: 30,
+                address: {
+                    street: "123 Main St",
+                    city: "Anytown",
+                    zip: "12345"
+                },
+                hobbies: ["reading", "coding", "hiking"]
+            };
+            
+            // Test query with syntax error
+            const testQuery = '.name + ['; // Unclosed bracket syntax error
+            
+            try {
+                responseElement.textContent = 'Sending request to JQ server...';
+                responseElement.className = '';
+                
+                const response = await fetch('http://localhost:3001/api/jq', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        query: testQuery,
+                        data: testData
+                    })
+                });
+                
+                const result = await response.json();
+                
+                responseElement.textContent = JSON.stringify(result, null, 2);
+                
+                if (response.ok) {
+                    responseElement.className = 'success';
+                } else {
+                    responseElement.className = 'error';
+                }
+                
+                // Check if error details are included
+                if (result.errorDetails) {
+                    errorDetailsElement.textContent = `
+Error Type: ${result.errorDetails.type}
+Position: ${JSON.stringify(result.errorDetails.position)}
+Raw Message: ${result.errorDetails.rawMessage}
+                    `;
+                    errorDetailsElement.className = 'error';
+                } else {
+                    errorDetailsElement.textContent = 'No error details found in response';
+                    errorDetailsElement.className = '';
+                }
+                
+            } catch (error) {
+                responseElement.textContent = `Error making request: ${error.message}`;
+                responseElement.className = 'error';
+                errorDetailsElement.textContent = 'Could not get error details';
+                errorDetailsElement.className = 'error';
+            }
+        });
+    </script>
+</body>
+</html>

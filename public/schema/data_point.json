@@ -1,0 +1,165 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://contextsuite.com/schemas/data_point.json",
+  "title": "DataPoint",
+  "description": "Schema for an individual Data Point within a Time Series.",
+  "type": "object",
+  "properties": {
+    "series_gid": {
+      "description": "The GID of the time series this data point belongs to.",
+      "type": "string",
+      "format": "uuid"
+    },
+    "entity_gid": {
+      "description": "GID for the entity that the datapoint belongs to.",
+      "type": ["null", "string"],
+      "format": "uuid"
+    },
+    "entity_gid_url": {
+      "description": "GID URL for the entity that the datapoint belongs to.",
+      "type": ["null", "string"],
+      "format": "uri"
+    },
+    "geohash": {
+      "description": "Geolocation as a geohash (for clustering and sorting) - moves for non-stationary entities",
+      "type": ["null", "string"]
+    },
+    "period": {
+      "description": "The resolution/frequency of the data in ISO 8601 duration format (e.g., 'PT1H' for hourly, 'P1D' for daily, 'P1M' for monthly, etc.).",
+      "type": ["null", "string"]
+    },
+    "timestamp": {
+      "description": "The start of the period for which the data is reported (UTC).",
+      "type": "string",
+      "format": "date-time"
+    },
+    "owner_gid": {
+      "description": "The GID of the owner that this data point belongs to. Links to an Entity.",
+      "type": ["null", "string"],
+      "format": "uuid"
+    },
+    "source_gid": {
+      "description": "The GID of the source that this data point belongs to. Links to an Entity.",
+      "type": ["null", "string"],
+      "format": "uuid"
+    },
+    "publisher_gid": {
+      "description": "The GID of the publisher that this data point belongs to. Links to an Entity.",
+      "type": ["null", "string"],
+      "format": "uuid"
+    },
+    "publication_gid": {
+      "description": "The GID of the publication that this data point belongs to. Links to an Entity.",
+      "type": ["null", "string"],
+      "format": "uuid"
+    },
+    "gids": {
+      "description": "Additional links to Named Entities.",
+      "type": ["null", "object"],
+      "additionalProperties": { "type": "string", "format": "uuid" }
+    },
+    "location": {
+      "description": "Additional geography for the datapoint.",
+      "type": ["null", "object"],
+      "additionalProperties": { "type": "string" }
+    },
+    "demography": {
+      "description": "Additional demography for the datapoint.",
+      "type": ["null", "object"],
+      "additionalProperties": { "type": "string" }
+    },
+    "classification": {
+      "description": "Additional classification for the datapoint.",
+      "type": ["null", "object"],
+      "additionalProperties": { "type": "string" }
+    },
+    "topology": {
+      "description": "Additional topology for the datapoint.",
+      "type": ["null", "object"],
+      "additionalProperties": { "type": "string" }
+    },
+    "usage": {
+      "description": "Additional usage for the datapoint.",
+      "type": ["null", "object"],
+      "additionalProperties": { "type": "string" }
+    },
+    "device": {
+      "description": "Additional device for the datapoint.",
+      "type": ["null", "object"],
+      "additionalProperties": { "type": "string" }
+    },
+    "product": {
+      "description": "Additional product for the datapoint.",
+      "type": ["null", "object"],
+      "additionalProperties": { "type": "string" }
+    },
+    "flags": {
+      "description": "Additional flags for the datapoint.",
+      "type": ["null", "object"],
+      "additionalProperties": { "type": "boolean" }
+    },
+    "tags": {
+      "description": "Additional tags for the datapoint.",
+      "type": ["null", "array"],
+      "items": { "type": "string" }
+    },
+    "dimensions": {
+      "description": "Dimensions for the entity.",
+      "type": ["null", "object"],
+      "additionalProperties": { "type": "string" }
+    },
+    "metrics": {
+      "description": "Metrics for the datapoint - the measurement.",
+      "type": "object",
+      "additionalProperties": { "type": "number", "format": "double" },
+      "minItems": 1
+    },
+    "mtype": {
+      "description": "The measurement type for a metric.",
+      "type": ["null", "object"],
+      "additionalProperties": { "type": "string" }
+    },
+    "uom": {
+      "description": "Unit of measure for the metrics. All UOM are linked to a UOM Entity. Must be defined for every metric in the data point.",
+      "type": ["null", "object"],
+      "additionalProperties": { "type": "string" },
+      "minItems": 1
+    },
+    "of_what": {
+      "description": "What the metric is measuring, often based on a standard (e.g., from Wikidata/DBPedia). The key is the metric name and the value is the standard (e.g., 'population', 'oil', 'humidity', etc.).",
+      "type": ["null", "object"],
+      "additionalProperties": { "type": "string" }
+    },
+    "agg_method": {
+      "description": "The default aggregation method for the metric. The key is the metric name and the value is the aggregation method (e.g., 'sum', 'avg', 'max', 'min', etc.).",
+      "type": ["null", "object"],
+      "additionalProperties": { "type": "string" }
+    },
+    "access_type": {
+      "description": "Access type for the data point, derived from an Enum in the source database defining levels like Local, Exclusive, Group, Shared, Public etc.",
+      "type": ["string"],
+      "enum": ["Local", "Exclusive", "Group", "SharedPercentiles", "SharedObfuscated", "Shared", "Public"],
+      "default": "Exclusive"
+    },
+    "signature": {
+      "description": "Signature for ensuring correct updates/replacements.",
+      "type": "string",
+      "format": "uuid"
+    },
+    "partition": {
+      "description": "The version of the event message, used for partitioning.",
+      "type": ["null", "string"]
+    },
+    "sign": {
+      "description": "Sign for ReplacingMergeTree engine.",
+      "type": "integer",
+      "default": 1
+    }
+  },
+  "required": [
+    "series_gid",
+    "timestamp",
+    "period",
+    "metrics"
+  ]
+}

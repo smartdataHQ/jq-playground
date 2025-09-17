@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://contextsuite.com/schemas/base_event_info_schema.json",
+  "title": "Base Event Info",
+  "description": "Schema for information about a base event, used when an event is derived from one or more root events.",
+  "type": "object",
+  "properties": {
+    "event_gid": { "type": "string", "format": "uuid", "description": "The GID of the original root event." },
+    "type": { "type": "string", "description": "The type of the original root event (e.g., 'page', 'track', 'identify', 'group', 'alias', 'screen', 'commerce')." },
+    "event": { "type": "string", "description": "The name of the original root event (e.g., 'Page Viewed', 'Product Added', 'User Signed Up')." },
+    "timestamp": { "type": "string", "format": "date-time", "description": "The timestamp of the original root event in UTC (e.g., '2022-01-01T00:00:00Z')." },
+    "message_id": { "type": "string", "description": "The message ID of the original root event." },
+    "entity_gid": { "type": "string", "format": "uuid", "description": "The entity GID associated with the original root event." }
+  },
+  "required": [
+    "event_gid",
+    "type",
+    "event",
+    "timestamp",
+    "message_id",
+    "entity_gid"
+  ],
+  "additionalProperties": false
+}

@@ -1,0 +1,46 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://contextsuite.com/schemas/embeddings_schema.json",
+  "title": "Embeddings",
+  "description": "Schema for an embedding associated with an entity's content.",
+  "type": "object",
+  "properties": {
+    "label": {
+      "description": "Label of the content that was embedded, typically matching a label from the entity's content array (e.g., 'Prologue', 'Synopsis', 'Description', 'Summary', 'Conditions', 'History', 'Other').",
+      "type": "string"
+    },
+    "model": {
+      "description": "The model used to generate the embedding (e.g., 'text-embedding-3-small', 'text-embedding-3-large').",
+      "type": "string"
+    },
+    "vectors": {
+      "description": "The vector representation of the content, used for similarity search and clustering (e.g., an array of floats, often 1024 dimensions).",
+      "type": "array",
+      "items": {
+        "type": "number",
+        "format": "double"
+      }
+    },
+    "content_starts": {
+      "description": "Optional prefix added to the content before embedding (e.g., 'Title: ', 'Description: ', 'Content: ').",
+      "type": ["null", "string"]
+    },
+    "content_ends": {
+      "description": "Optional suffix added to the content after embedding (e.g., ' ', '.', ' - ').",
+      "type": ["null", "string"]
+    },
+    "opening_phrase": {
+      "description": "Optional opening phrase used during the generation of the embedding input (e.g., 'This is a description of ', 'This is a content of ').",
+      "type": ["null", "string"]
+    },
+    "closing_phrase": {
+      "description": "Optional closing phrase used during the generation of the embedding input (e.g., ' for more information.', ' for more details.').",
+      "type": ["null", "string"]
+    }
+  },
+  "required": [
+    "label",
+    "model",
+    "vectors"
+  ]
+}

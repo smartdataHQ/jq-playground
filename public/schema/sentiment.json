@@ -1,0 +1,59 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://contextsuite.com/schemas/sentiment_schema.json",
+  "title": "Sentiment",
+  "description": "Schema for sentiment expressed in a semantic event.",
+  "type": "object",
+  "properties": {
+    "type": {
+      "description": "Type of the sentiment. SQL Enum8('Praise'=1, 'Criticism'=2, 'Complaint'=3, 'Abuse'=4, 'Threat'=5, 'Opinion'=6, 'Other'=0).",
+      "type": "string",
+      "enum": ["Praise", "Criticism", "Complaint", "Abuse", "Threat", "Opinion", "Other"]
+    },
+    "sentiment": {
+      "description": "The sentiment expressed.",
+      "type": "string"
+    },
+    "entity_type": {
+      "description": "The type of the entity that the sentiment is about.",
+      "type": "string"
+    },
+    "entity_gid": {
+      "description": "The GID of the entity that the sentiment is expressed about.",
+      "type": ["null", "string"],
+      "format": "uuid"
+    },
+    "id_type": {
+      "description": "The ID type of the entity that the sentiment is expressed about.",
+      "type": "string"
+    },
+    "id": {
+      "description": "The ID of the entity that the sentiment is expressed about.",
+      "type": ["null", "string"]
+    },
+    "target_category": {
+      "description": "The category of the target of the sentiment.",
+      "type": "string"
+    },
+    "target_type": {
+      "description": "The type of the target of the sentiment.",
+      "type": "string"
+    },
+    "target_entity": {
+      "description": "The specific target entity of the sentiment.",
+      "type": ["null", "string"]
+    },
+    "reason": {
+      "description": "The reasoning behind the sentiment.",
+      "type": ["null", "string"]
+    }
+  },
+  "required": [
+    "type",
+    "sentiment",
+    "entity_type",
+    "id_type",
+    "target_category",
+    "target_type"
+  ]
+}

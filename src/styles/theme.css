@@ -1,0 +1,125 @@
+/* Theme CSS Variables
+ * This file defines CSS variables for both light and dark themes.
+ * These variables are referenced in the tailwind.config.js file.
+ */
+
+:root {
+  /* Default theme (dark) */
+  
+  /* Background colors */
+  --color-bg-primary: #111827;    /* gray-900 */
+  --color-bg-secondary: #1f2937;  /* gray-800 */
+  --color-bg-tertiary: #374151;   /* gray-700 */
+  
+  /* Text colors */
+  --color-text-primary: #f9fafb;  /* gray-50 */
+  --color-text-secondary: #e5e7eb; /* gray-200 */
+  --color-text-accent: #60a5fa;   /* blue-400 */
+  --color-text-success: #34d399;  /* green-400 */
+  --color-text-error: #f87171;    /* red-400 */
+  --color-text-warning: #fbbf24;  /* amber-400 */
+  
+  /* Border colors */
+  --color-border-primary: #374151;   /* gray-700 */
+  --color-border-secondary: #4b5563; /* gray-600 */
+  --color-border-accent: #3b82f6;    /* blue-500 */
+  --color-border-success: #10b981;   /* green-500 */
+  --color-border-error: #ef4444;     /* red-500 */
+  
+  /* Button colors */
+  --color-button-primary-bg: #2563eb;     /* blue-600 */
+  --color-button-primary-hover: #1d4ed8;  /* blue-700 */
+  --color-button-primary-text: #ffffff;   /* white */
+  
+  --color-button-secondary-bg: #4b5563;   /* gray-600 */
+  --color-button-secondary-hover: #374151; /* gray-700 */
+  --color-button-secondary-text: #ffffff;  /* white */
+  
+  --color-button-success-bg: #10b981;     /* green-600 */
+  --color-button-success-hover: #059669;  /* green-700 */
+  --color-button-success-text: #ffffff;   /* white */
+  
+  --color-button-danger-bg: #dc2626;      /* red-600 */
+  --color-button-danger-hover: #b91c1c;   /* red-700 */
+  --color-button-danger-text: #ffffff;    /* white */
+  
+  --color-button-disabled-bg: #6b7280;    /* gray-500 */
+  --color-button-disabled-text: #e5e7eb;  /* gray-200 */
+  
+  /* Notification colors */
+  --color-notification-success-bg: rgba(16, 185, 129, 0.2);  /* green-600 with opacity */
+  --color-notification-success-border: #10b981;              /* green-600 */
+  --color-notification-success-text: #34d399;                /* green-400 */
+  
+  --color-notification-error-bg: rgba(220, 38, 38, 0.2);     /* red-600 with opacity */
+  --color-notification-error-border: #dc2626;                /* red-600 */
+  --color-notification-error-text: #f87171;                  /* red-400 */
+  
+  --color-notification-warning-bg: rgba(217, 119, 6, 0.2);   /* amber-600 with opacity */
+  --color-notification-warning-border: #d97706;              /* amber-600 */
+  --color-notification-warning-text: #fbbf24;                /* amber-400 */
+  
+  --color-notification-info-bg: rgba(37, 99, 235, 0.2);      /* blue-600 with opacity */
+  --color-notification-info-border: #2563eb;                 /* blue-600 */
+  --color-notification-info-text: #60a5fa;                   /* blue-400 */
+}
+
+/* Light theme */
+.theme-light {
+  /* Background colors */
+  --color-bg-primary: #f9fafb;    /* gray-50 */
+  --color-bg-secondary: #f3f4f6;  /* gray-100 */
+  --color-bg-tertiary: #e5e7eb;   /* gray-200 */
+  
+  /* Text colors */
+  --color-text-primary: #111827;  /* gray-900 */
+  --color-text-secondary: #374151; /* gray-700 */
+  --color-text-accent: #2563eb;   /* blue-600 */
+  --color-text-success: #059669;  /* green-600 */
+  --color-text-error: #dc2626;    /* red-600 */
+  --color-text-warning: #d97706;  /* amber-600 */
+  
+  /* Border colors */
+  --color-border-primary: #d1d5db;   /* gray-300 */
+  --color-border-secondary: #9ca3af; /* gray-400 */
+  --color-border-accent: #3b82f6;    /* blue-500 */
+  --color-border-success: #10b981;   /* green-500 */
+  --color-border-error: #ef4444;     /* red-500 */
+  
+  /* Button colors */
+  --color-button-primary-bg: #3b82f6;     /* blue-500 */
+  --color-button-primary-hover: #2563eb;  /* blue-600 */
+  --color-button-primary-text: #ffffff;   /* white */
+  
+  --color-button-secondary-bg: #9ca3af;   /* gray-400 */
+  --color-button-secondary-hover: #6b7280; /* gray-500 */
+  --color-button-secondary-text: #ffffff;  /* white */
+  
+  --color-button-success-bg: #10b981;     /* green-500 */
+  --color-button-success-hover: #059669;  /* green-600 */
+  --color-button-success-text: #ffffff;   /* white */
+  
+  --color-button-danger-bg: #ef4444;      /* red-500 */
+  --color-button-danger-hover: #dc2626;   /* red-600 */
+  --color-button-danger-text: #ffffff;    /* white */
+  
+  --color-button-disabled-bg: #d1d5db;    /* gray-300 */
+  --color-button-disabled-text: #6b7280;  /* gray-500 */
+  
+  /* Notification colors */
+  --color-notification-success-bg: rgba(16, 185, 129, 0.1);  /* green-500 with opacity */
+  --color-notification-success-border: #10b981;              /* green-500 */
+  --color-notification-success-text: #059669;                /* green-600 */
+  
+  --color-notification-error-bg: rgba(239, 68, 68, 0.1);     /* red-500 with opacity */
+  --color-notification-error-border: #ef4444;                /* red-500 */
+  --color-notification-error-text: #dc2626;                  /* red-600 */
+  
+  --color-notification-warning-bg: rgba(245, 158, 11, 0.1);  /* amber-500 with opacity */
+  --color-notification-warning-border: #f59e0b;              /* amber-500 */
+  --color-notification-warning-text: #d97706;                /* amber-600 */
+  
+  --color-notification-info-bg: rgba(59, 130, 246, 0.1);     /* blue-500 with opacity */
+  --color-notification-info-border: #3b82f6;                 /* blue-500 */
+  --color-notification-info-text: #2563eb;                   /* blue-600 */
+}

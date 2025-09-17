@@ -1,0 +1,66 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://contextsuite.com/schemas/uom.json",
+  "title": "UnitOfMeasure",
+  "description": "Schema for a Unit of Measure (UOM) entity.",
+  "type": "object",
+  "properties": {
+    "code": {
+      "description": "CEFACT code for the unit of measure (e.g., 'kg', 'm', 's').",
+      "type": "string"
+    },
+    "label": {
+      "description": "Human-readable label for the UOM (e.g., 'Kilogram', 'Meter').",
+      "type": "string"
+    },
+    "symbol": {
+      "description": "Symbol for the UOM (e.g., 'kg', 'm').",
+      "type": "string"
+    },
+    "slug": {
+      "description": "URL-friendly version of the code (e.g., 'kilogram', 'meter').",
+      "type": "string"
+    },
+    "description": {
+      "description": "A description of the unit of measure (e.g., 'A kilogram is a unit of mass in the metric system.').",
+      "type": ["null", "string"]
+    },
+    "conversion": {
+      "description": "A conversion factor to a base unit (e.g., '1 kg = 1000 g', '1 m = 100 cm').",
+      "type": ["null", "string"]
+    },
+    "core_unit": {
+      "description": "The core unit of measure that this unit is based on (e.g., 'kg' for mass, 'm' for length).",
+      "type": ["null", "string"]
+    },
+    "level": {
+      "description": "Level in a hierarchy (e.g., 'base', 'derived').",
+      "type": ["null", "string"]
+    },
+    "sectors": {
+      "description": "The sectors that this unit of measure is applicable to (e.g., 'agriculture', 'energy', 'transportation').",
+      "type": ["null", "array"],
+      "items": { "type": "string" }
+    },
+    "quantities": {
+      "description": "The quantities that this unit of measure can measure (e.g., 'mass', 'length', 'time').",
+      "type": ["null", "array"],
+      "items": { "type": "string" }
+    },
+    "schema_name": {
+      "description": "Schema or standard this UOM adheres to (e.g., 'SI', 'Imperial'). Renamed from 'schema' to avoid conflict.",
+      "type": ["null", "string"]
+    },
+    "properties": {
+      "description": "Additional properties for the unit of measure (e.g., 'precision', 'accuracy').",
+      "type": ["null", "object"],
+      "additionalProperties": { "type": "string" }
+    }
+  },
+  "required": [
+    "code",
+    "label",
+    "symbol",
+    "slug"
+  ]
+}

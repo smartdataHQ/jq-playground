@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test localStorage Fix</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        button {
+            padding: 10px;
+            margin: 10px 0;
+            cursor: pointer;
+        }
+        pre {
+            background-color: #f5f5f5;
+            padding: 10px;
+            border-radius: 5px;
+            overflow: auto;
+        }
+        .success {
+            color: green;
+            font-weight: bold;
+        }
+        .error {
+            color: red;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>Test localStorage Fix</h1>
+    <p>This page tests the fix for the QuotaExceededError in the JQ Playground app.</p>
+    
+    <button id="testButton">Run Test</button>
+    <button id="clearButton">Clear localStorage</button>
+    
+    <h2>Results:</h2>
+    <pre id="results"></pre>
+    
+    <script>
+        // Function to generate a large string
+        function generateLargeString(size) {
+            const chunk = '{"key":"' + 'x'.repeat(1000) + '"},';
+            let result = '[';
+            for (let i = 0; i < size / chunk.length; i++) {
+                result += chunk;
+            }
+            result = result.slice(0, -1) + ']'; // Remove trailing comma and close array
+            return result;
+        }
+        
+        // Function to log results
+        function log(message, isError = false) {
+            const resultsElement = document.getElementById('results');
+            const div = document.createElement('div');
+            div.textContent = message;
+            div.className = isError ? 'error' : '';
+            if (!isError && message.includes('SUCCESS')) {
+                div.className = 'success';
+            }
+            resultsElement.appendChild(div);
+            console.log(message);
+        }
+        
+        // Test function
+        async function runTest() {
+            document.getElementById('results').innerHTML = '';
+            log('Starting test...');
+            
+            try {
+                // 1. Test with our fixed implementation
+                log('Testing fixed implementation...');
+                
+                // Generate a large JSON input (6MB)
+                const largeJsonInput = generateLargeString(6 * 1024 * 1024);
+                log(`Generated large JSON input: ${(largeJsonInput.length / (1024 * 1024)).toFixed(2)}MB`);
+                
+                // Create state object
+                const state = {
+                    jsonInput: largeJsonInput,
+                    jqQuery: '.[] | select(.key)',
+                    timestamp: Date.now()
+                };
+                
+                // Try to save with our fixed implementation
+                try {
+                    // Check if the data is too large (estimating size)
+                    const stateString = JSON.stringify(state);
+                    const estimatedSize = new Blob([stateString]).size;
+                    
+                    // If data is larger than 4MB (conservative limit), trim it down
+                    const MAX_SIZE = 4 * 1024 * 1024; // 4MB
+                    
+                    if (estimatedSize > MAX_SIZE) {
+                        log(`Editor state exceeds safe size limit (${(estimatedSize / (1024 * 1024)).toFixed(2)}MB). Trimming data.`);
+                        
+                        // Create a trimmed version with limited JSON input
+                        const trimmedState = {
+                            jsonInput: state.jsonInput.length > 100000 ? state.jsonInput.substring(0, 100000) + "... (trimmed for storage)" : state.jsonInput,
+                            jqQuery: state.jqQuery,
+                            timestamp: state.timestamp,
+                            wasTrimmed: true
+                        };
+                        
+                        localStorage.setItem('jq-editor-state', JSON.stringify(trimmedState));
+                        log('Successfully saved trimmed state to localStorage');
+                    } else {
+                        // Normal case - data fits in localStorage
+                        localStorage.setItem('jq-editor-state', stateString);
+                        log('Successfully saved state to localStorage');
+                    }
+                    
+                    // Verify we can read it back
+                    const saved = localStorage.getItem('jq-editor-state');
+                    const loadedState = JSON.parse(saved);
+                    
+                    if (loadedState.wasTrimmed) {
+                        log('Loaded state was trimmed as expected');
+                    }
+                    
+                    log('Trimmed JSON length: ' + loadedState.jsonInput.length);
+                    log('Original JQ query preserved: ' + (loadedState.jqQuery === state.jqQuery));
+                    
+                    log('SUCCESS: Fixed implementation handled large data correctly!');
+                } catch (error) {
+                    log('Error with fixed implementation: ' + error.message, true);
+                }
+                
+                // 2. Test with original implementation for comparison
+                log('\nTesting original implementation for comparison...');
+                
+                try {
+                    // This would be the original implementation without error handling
+                    localStorage.setItem('jq-editor-state-original', JSON.stringify(state));
+                    log('Successfully saved to localStorage with original implementation (unexpected)');
+                } catch (error) {
+                    log('Error with original implementation: ' + error.message, true);
+                    log('This error is expected with the original implementation');
+                }
+                
+            } catch (error) {
+                log('Test error: ' + error.message, true);
+            }
+        }
+        
+        // Clear localStorage
+        function clearLocalStorage() {
+            try {
+                localStorage.removeItem('jq-editor-state');
+                localStorage.removeItem('jq-editor-state-original');
+                document.getElementById('results').innerHTML = '';
+                log('localStorage cleared');
+            } catch (error) {
+                log('Error clearing localStorage: ' + error.message, true);
+            }
+        }
+        
+        // Add event listeners
+        document.getElementById('testButton').addEventListener('click', runTest);
+        document.getElementById('clearButton').addEventListener('click', clearLocalStorage);
+    </script>
+</body>
+</html>

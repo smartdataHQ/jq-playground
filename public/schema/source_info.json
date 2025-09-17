@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://contextsuite.com/schemas/source_info_schema.json",
+  "title": "SourceInfo",
+  "description": "Schema for information about the source system or input of an event.",
+  "type": "object",
+  "properties": {
+    "type": { "type": "string","description": "Type of the source (e.g., 'CRM', 'ERP', 'eCommerce', 'Social', 'Email', 'SMS', 'Web', 'Mobile', 'API', 'Other')." },
+    "label": { "type": ["null", "string"], "description": "Label for the source (e.g., 'Salesforce Production')." },
+    "source_gid": { "type": ["null", "string"], "format": "uuid", "description": "The Graph UUID of the source system entity for the event, if applicable." },
+    "access_gid": { "type": ["null", "string"], "format": "uuid", "description": "The Graph UUID related to the authentication details or access method used for this source." }
+  },
+  "required": ["type"],
+  "additionalProperties": false
+}

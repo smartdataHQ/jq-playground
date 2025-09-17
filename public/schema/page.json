@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://contextsuite.com/schemas/page_schema.json",
+  "title": "Page",
+  "description": "Schema for page view information.",
+  "type": "object",
+  "properties": {
+    "encoding": { "type": "string", "description": "The encoding of the page (e.g. \"UTF-8\")." },
+    "host": { "type": "string", "description": "The host of the page (e.g. \"segment.com\")." },
+    "path": { "type": "string", "description": "The path of the page (e.g. \"/docs\")." },
+    "referrer": { "type": "string", "description": "The referrer of the page (e.g. \"https://segment.com\")." },
+    "referring_domain": { "type": "string", "description": "The referring domain of the page (e.g. \"segment.com\")." },
+    "search": { "type": "string", "description": "The search query of the page (e.g. \"segment\")." },
+    "title": { "type": "string", "description": "The title of the page (e.g., 'Analytics.js Quickstart - Segment')." },
+    "url": { "type": "string", "format": "uri", "description": "The URL of the page (e.g., 'https://segment.com/docs/connections/sources/catalog/libraries/website/javascript/quickstart/')." }
+  },
+  "required": [
+    "encoding",
+    "host",
+    "path",
+    "search",
+    "title",
+    "url"
+  ],
+  "additionalProperties": false
+}

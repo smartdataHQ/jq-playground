@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://contextsuite.com/schemas/app_schema.json",
+  "title": "Application",
+  "description": "Schema for mobile application information.",
+  "type": "object",
+  "properties": {
+    "build": { "type": "string", "description": "The build of the app (e.g. \"1.1.0\")." },
+    "name": { "type": "string", "description": "The name of the app (e.g. \"Segment\")." },
+    "namespace": { "type": "string", "description": "The namespace of the app (e.g. \"com.segment.analytics\")." },
+    "version": { "type": "string", "description": "The version of the app (e.g. \"1.1.0\")." }
+  },
+  "required": [
+    "build",
+    "name",
+    "namespace",
+    "version"
+  ],
+  "additionalProperties": false
+}
