@@ -1,0 +1,145 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://contextsuite.com/schemas/entity.json",
+  "title": "Entity",
+  "description": "Schema for a ContextSuite Entity, based on SQL, Avro, and Pydantic models. Avro is the primary source of truth.",
+  "type": "object",
+  "properties": {
+    "gid": {
+      "description": "The globally unique identifier (Graph UUID) of the entity.",
+      "type": "string",
+      "format": "uuid"
+    },
+    "gid_url": {
+      "description": "The RDF URL representation of the entity's GID.",
+      "type": "string",
+      "format": "uri"
+    },
+    "label": {
+      "description": "The primary human-readable label for the entity (e.g., \"Eiffel Tower\").",
+      "type": "string"
+    },
+    "labels": {
+      "description": "A list of additional labels or translations for the entity, often prefixed with a language code (e.g., [\"en:Eiffel Tower\", \"fr:Tour Eiffel\"]).",
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "type": {
+      "description": "The primary type of the entity (e.g., 'Event', 'Place', 'Person'). Value should be in English, singular form, and capitalized.",
+      "type": "string"
+    },
+    "variant": {
+      "description": "A subtype or variant of the main entity type (e.g., 'Concert' for type 'Event'). Value should be in English, singular form, and capitalized.",
+      "type": "string"
+    },
+    "icon": {
+      "description": "An identifier for an icon representing the entity (e.g., 'concert', 'exhibition'). Value should be in English, singular form, and lowercase.",
+      "type": "string"
+    },
+    "colour": {
+      "description": "A color associated with the entity (e.g., 'red', 'blue'). Value should be in English and lowercase.",
+      "type": "string"
+    },
+    "dimensions": {
+      "description": "Key-value pairs for additional generic dimensions describing the entity. Both keys and values are strings.",
+      "type": "object",
+      "additionalProperties": {
+        "type": "string"
+      }
+    },
+    "tags": {
+      "description": "A list of descriptive tags associated with the entity.",
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "flags": {
+      "description": "A map of boolean flags providing additional status or characteristics of the entity.",
+      "type": "object",
+      "additionalProperties": {
+        "type": "boolean"
+      }
+    },
+    "metrics": {
+      "description": "A map of numerical metrics associated with the entity.",
+      "type": "object",
+      "additionalProperties": {
+        "type": "number"
+      }
+    },
+    "properties": {
+      "description": "A map of additional string-based properties or attributes of the entity.",
+      "type": "object",
+      "additionalProperties": {
+        "type": "string"
+      }
+    },
+    "names": {
+      "description": "A map of alternative names or translations for the entity, where the key is the language code (e.g., 'fr') or a description of the name type, and the value is the name itself (e.g., 'Tour Eiffel').",
+      "type": "object",
+      "additionalProperties": {
+        "type": "string"
+      }
+    },
+    "content": {
+      "description": "A list of structured content items related to the entity, each defined by the 'content_schema.json'.",
+      "type": "array",
+      "items": {
+        "$ref": "content.json"
+      }
+    },
+    "media": {
+      "description": "A list of media items (images, videos, etc.) associated with the entity, each defined by the 'media_schema.json'.",
+      "type": "array",
+      "items": {
+        "$ref": "media.json"
+      }
+    },
+    "embeddings": {
+      "description": "A list of embedding vectors associated with the entity or its content, each defined by the 'embeddings_schema.json'.",
+      "type": "array",
+      "items": {
+        "$ref": "embeddings.json"
+      }
+    },
+    "ids": {
+      "description": "A list of external or alternative identifiers associated with the entity, each defined by the 'id_schema.json'.",
+      "type": "array",
+      "items": {
+        "$ref": "id.json"
+      }
+    },
+    "classification": {
+      "description": "A list of classifications (categories, tags, etc.) for the entity, each defined by the 'classification_schema.json'.",
+      "type": "array",
+      "items": {
+        "$ref": "classification.json"
+      }
+    },
+    "location": {
+      "description": "A list of geographic locations associated with the entity, each defined by the 'location_schema.json'.",
+      "type": "array",
+      "items": {
+        "$ref": "location.json"
+      }
+    },
+    "partition": {
+      "description": "The storage partition for the entity. This is internal and cannot be submitted by the user. It is used to partition the data for performance and scalability.",
+      "type": "string",
+      "default": "_open_"
+    },
+    "sign": {
+      "description": "Internal field for ReplacingMergeTree, used to mark the latest version of the entity and ensure correct updates/replacements.",
+      "type": "integer",
+      "default": 1
+    }
+  },
+  "required": [
+    "gid_url",
+    "label",
+    "type"
+  ]
+}

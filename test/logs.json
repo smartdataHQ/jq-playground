@@ -1,0 +1,74 @@
+{
+  "logs": [
+    {
+      "timestamp": "2024-01-15T10:30:15.123Z",
+      "level": "info",
+      "message": "User authentication successful",
+      "userId": "user123",
+      "ip": "192.168.1.100",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)",
+      "responseTime": 145,
+      "endpoint": "/api/login",
+      "method": "POST"
+    },
+    {
+      "timestamp": "2024-01-15T10:31:22.456Z",
+      "level": "error",
+      "message": "Database connection failed",
+      "error": {
+        "code": "ECONNREFUSED",
+        "message": "Connection refused by database server",
+        "stack": "Error: ECONNREFUSED\\n    at TCPConnectWrap.afterConnect"
+      },
+      "retryAttempt": 3,
+      "endpoint": "/api/users",
+      "method": "GET"
+    },
+    {
+      "timestamp": "2024-01-15T10:32:08.789Z",
+      "level": "warn",
+      "message": "High memory usage detected",
+      "memoryUsage": {
+        "used": "1.2GB",
+        "total": "2GB",
+        "percentage": 60
+      },
+      "pid": 1234,
+      "service": "api-server"
+    },
+    {
+      "timestamp": "2024-01-15T10:33:45.012Z",
+      "level": "info",
+      "message": "API request processed",
+      "userId": "user456",
+      "ip": "10.0.0.15",
+      "responseTime": 89,
+      "endpoint": "/api/products",
+      "method": "GET",
+      "statusCode": 200
+    },
+    {
+      "timestamp": "2024-01-15T10:34:12.345Z",
+      "level": "error",
+      "message": "Invalid request parameters",
+      "error": {
+        "field": "email",
+        "message": "Invalid email format",
+        "value": "invalid-email"
+      },
+      "endpoint": "/api/register",
+      "method": "POST",
+      "statusCode": 400
+    }
+  ],
+  "summary": {
+    "totalLogs": 5,
+    "errorCount": 2,
+    "warnCount": 1,
+    "infoCount": 2,
+    "timeRange": {
+      "start": "2024-01-15T10:30:15.123Z",
+      "end": "2024-01-15T10:34:12.345Z"
+    }
+  }
+}

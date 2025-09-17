@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://contextsuite.com/schemas/user_agent_schema.json",
+  "title": "User Agent",
+  "description": "Schema for user agent information.",
+  "type": "object",
+  "properties": {
+    "signature": { "type": "string", "description": "The full User-Agent string (e.g., 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.101 Safari/537.36')." },
+    "mobile": { "type": ["null", "boolean"], "description": "Whether the user agent is identified as mobile (e.g., true)." },
+    "platform": { "type": "string", "description": "The platform of the user agent (e.g., 'Apple Mac', 'Windows')." },
+    "data": {
+      "type": ["null", "array"],
+      "items": { "$ref": "user_agent_data.json"},
+      "description": "List of User-Agent Client Hints data, providing brand and version for different components."
+    }
+  },
+  "required": [
+    "signature",
+    "platform"
+  ],
+  "additionalProperties": false
+}

@@ -1,0 +1,234 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://contextsuite.com/schemas/semantic_event.json",
+  "title": "Semantic Event",
+  "description": "Schema for a ContextSuite Semantic Event. Avro is the primary source of truth.",
+  "type": "object",
+  "properties": {
+    "entity_gid": {
+      "description": "The entity that the event is associated with (Context Suite Specific) (Account or any sub-entity).",
+      "type": "string",
+      "format": "uuid"
+    },
+    "timestamp": {
+      "description": "The timestamp of the event, always stored in UTC",
+      "type": "string",
+      "format": "date-time"
+    },
+    "ty": {
+      "description": "The event type",
+      "enum": ["track", "page", "identify", "group", "alias", "screen", "other"]
+    },
+    "event": {
+      "description": "The event name (e.g. \"Product Added\") always capitalized and always ended with a verb in passed tense",
+      "type": "string"
+    },
+    "anonymous_id": {
+      "description": "The anonymous ID of the user before they are identified.",
+      "type": ["null", "string"]
+    },
+    "anonymous_gid": {
+      "description": "The anonymous GID (UUID) of the user before they are identified.",
+      "type": ["null", "string"],
+      "format": "uuid"
+    },
+    "user_id": {
+      "description": "The user ID of the user.",
+      "type": ["null", "string"]
+    },
+    "user_gid": {
+      "description": "The user GID (UUID) of the user.",
+      "type": ["null", "string"],
+      "format": "uuid"
+    },
+    "account_id": {
+      "description": "The account ID of the user (Often the same as the entity_gid).",
+      "type": ["null", "string"]
+    },
+    "previous_id": {
+      "description": "The user ID of the user before the event (e.g. 'anonymousId' before 'identify').",
+      "type": ["null", "string"]
+    },
+    "session_id": {
+      "description": "The session ID of the user in the client that generated the event.",
+      "type": ["null", "string"]
+    },
+    "session_gid": {
+      "description": "The session GID (UUID) of the user session that generated the event.",
+      "type": ["null", "string"],
+      "format": "uuid"
+    },
+    "context_ip": {
+      "description": "The IP address of the user in IPv4 format.",
+      "type": ["null", "string"],
+      "format": "ipv4"
+    },
+    "importance": {
+      "description": "The importance of the event (e.g., 1-5).",
+      "type": ["null", "integer"],
+      "minimum": 1,
+      "maximum": 5
+    },
+    "customer_facing": {
+      "description": "Indicates if the event is customer-facing (e.g., for UI display). Typically 0 for false, 1 for true. Default is 0.",
+      "type": "integer",
+      "default": 0
+    },
+    "content": {
+      "description": "A dictionary of additional content associated with the event. Keys can be 'Body', 'Subject', 'Title', 'Description', 'Summary', 'Initial Response', 'Other', etc.",
+      "type": "object",
+      "default": {},
+      "additionalProperties": { "type": "string" }
+    },
+    "involves": {
+      "description": "Entities involved in the event. Involvement can be implicit (via other properties) or explicit using this structure. Defined in 'involved_schema.json'.",
+      "type": ["null", "array"],
+      "items": { "$ref": "involved.json"}
+    },
+    "sentiment": {
+      "description": "Sentiment expressed in the event",
+      "type": ["null", "array"],
+      "items": { "$ref": "sentiment.json"}
+    },
+    "classification": {
+      "description": "Classification of the event (Intent, Categories, etc.)",
+      "type": ["null", "array"],
+      "items": { "$ref": "classification.json"}
+    },
+    "location": {
+      "description": "Location of the event",
+      "type": ["null", "array"],
+      "items": { "$ref": "location.json"}
+    },
+    "entity_linking": {
+      "description": "Entity links from content to named entities",
+      "type": ["null", "array"],
+      "items": { "$ref": "entity_linking.json"}
+    },
+    "contextual_awareness": {
+      "description": "Additional context for entities involved in the event",
+      "type": ["null", "array"],
+      "items": { "$ref": "contextual_awareness.json"}
+    },
+    "properties": {
+      "description": "A dictionary of additional properties for the event. Properties may be moved into dedicated columns if possible; otherwise, they are stored here.",
+      "type": "object",
+      "default": {},
+      "additionalProperties": { "type": "string" }
+    },
+    "dimensions": {
+      "description": "Additional low-cardinality dimensions for dashboards",
+      "type": "object",
+      "default": {},
+      "additionalProperties": { "type": "string" }
+    },
+    "metrics": {
+      "description": "Additional metrics for dashboards",
+      "type": "object",
+      "default": {},
+      "additionalProperties": { "type": "number", "format": "float" }
+    },
+    "flags": {
+      "description": "Additional boolean flags",
+      "type": "object",
+      "default": {},
+      "additionalProperties": { "type": "boolean" }
+    },
+    "campaign": { "$ref": "campaign.json"},
+    "app": { "$ref": "app.json"},
+    "device": { "$ref": "device.json"},
+    "os": { "$ref": "os.json"},
+    "library": { "$ref": "library.json"},
+    "user_agent": { "$ref": "user_agent.json"},
+    "network": { "$ref": "network.json"},
+    "traits": { "$ref": "traits.json"},
+    "page": { "$ref": "page.json"},
+    "referrer": { "$ref": "referrer.json"},
+    "screen": { "$ref": "screen.json"},
+    "context": { "$ref": "context.json"},
+    "commerce": { "$ref": "commerce.json"},
+    "analysis": {
+      "description": "Cost analysis of the event. This is strictly for internal use and should not be used for any other purpose. Defined in 'analysis_schema.json'.",
+      "type": ["null", "array"],
+      "items": { "$ref": "analysis.json"}
+    },
+    "base_events": {
+      "description": "Base event information if this is a derived event",
+      "type": ["null", "array"],
+      "items": { "$ref": "base_event.json"}
+    },
+    "access": {
+      "description": "Access control list for the event",
+      "type": ["null", "array"],
+      "items": { "$ref": "access.json"}
+    },
+    "source": { "$ref": "source_info.json"},
+    "local_time": {
+      "description": "The original timestamp of the event in the local timezone of the sender.",
+      "type": ["null", "string"],
+      "format": "date-time"
+    },
+    "original_timestamp": {
+      "description": "The original timestamp of when the event occurred, as reported by the source.",
+      "type": ["null", "string"],
+      "format": "date-time"
+    },
+    "received_at": {
+      "description": "The timestamp when the event was received by the collection system (e.g., Segment).",
+      "type": ["null", "string"],
+      "format": "date-time"
+    },
+    "sent_at": {
+      "description": "The timestamp when the event was sent by the client library.",
+      "type": ["null", "string"],
+      "format": "date-time"
+    },
+    "message_id": {
+      "description": "A unique ID for each message, typically assigned by the client library.",
+      "type": "string"
+    },
+    "event_gid": {
+      "description": "A unique GID (UUID) for each message, calculated on the server side from the message_id or other factors if missing.",
+      "type": "string",
+      "format": "uuid"
+    },
+    "root_event_gid": {
+      "description": "The root event GID (UUID) of the event. If this is a derived (higher order) event, this field will be populated with the GID of the original root event.",
+      "type": "string",
+      "format": "uuid"
+    },
+    "analyse": {
+      "description": "Custom analysis flags that override the default analysis behavior for this event.",
+      "type": "object",
+      "default": {},
+      "additionalProperties": { "type": "boolean" }
+    },
+    "integrations": {
+      "description": "Custom integration flags that override the default integration behavior for this event.",
+      "type": "object",
+      "default": {},
+      "additionalProperties": { "type": "boolean" }
+    },
+    "write_key": {
+      "description": "The write key used to send the event (e.g., a salted hash of the actual write key). Internal field, not user-settable via API.",
+      "type": "string"
+    },
+    "ttl_days": {
+      "description": "The number of days the event will be stored in the database. Defaults to forever if null.",
+      "type": ["null", "number"]
+    },
+    "partition": {
+      "description": "The version of the event message. Internal field used for partitioning, not user-settable via API.",
+      "type": "string"
+    }
+  },
+  "required": [
+    "timestamp",
+    "type",
+    "event",
+    "message_id",
+    "write_key",
+    "event_gid",
+    "partition"
+  ]
+}

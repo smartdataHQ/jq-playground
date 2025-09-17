@@ -1,0 +1,139 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://contextsuite.com/schemas/timeseries.json",
+  "title": "Time Series",
+  "description": "Schema for a ContextSuite Time Series, including its metadata and references to data points.",
+  "type": "object",
+  "properties": {
+    "gid": {
+      "description": "Unique GID for the time series.",
+      "type": "string",
+      "format": "uuid"
+    },
+    "gid_url": {
+      "description": "RDF URL for the time series.",
+      "type": "string",
+      "format": "uri"
+    },
+    "group_gid": {
+      "description": "Unique GID for the time series group.",
+      "type": "string",
+      "format": "uuid"
+    },
+    "group_gid_url": {
+      "description": "RDF URL for the conceptual group this time series belongs to.",
+      "type": "string",
+      "format": "uri"
+    },
+    "label": {
+      "description": "Human-readable label for the time series.",
+      "type": "string"
+    },
+    "slug": {
+      "description": "URL-friendly slug generated from the label.",
+      "type": "string"
+    },
+    "value_types": {
+      "description": "The nature of the values in the time series (e.g., Actual, Forecast).",
+      "type": "string",
+      "enum": ["Actual", "Goal", "Estimation", "Projection", "Forecast", "Official", "Unknown"],
+      "default": "Actual"
+    },
+    "completeness": {
+      "description": "The completeness status of the time series data.",
+      "type": "string",
+      "enum": ["Unspecified", "Partial", "InProgress", "Complete", "Verified", "Golden", "Unknown", "Irrelevant"],
+      "default": "Complete"
+    },
+    "category": {
+      "description": "Primary category of the time series data.",
+      "type": ["null", "string"],
+      "enum": [null, "Agriculture", "Communication", "Culture", "Demography", "Economy", "Education", "Energy", "Environment", "Geography", "Governance", "Health", "Industry", "Infrastructure", "Media", "Other", "Philosophy", "Politics", "Physics", "Religion", "Science", "Security", "Society", "SocialMedia", "Sports", "Technology", "Tourism", "Transportation", "Weather"]
+    },
+    "sub_category": {
+      "description": "Sub-category providing more specific classification.",
+      "type": ["null", "string"]
+    },
+    "resolution": {
+      "description": "The resolution or frequency of data points (e.g., P1D for daily, PT1H for hourly).",
+      "type": ["null", "string"],
+      "enum": [null, "PNT", "P1Y", "P1Q", "P2M", "P1M", "P2W", "P1W", "P1D", "PT1H", "PT30M", "PT15M", "PT10M", "PT5M", "PTM", "PT1S"]
+    },
+    "metrics": {
+      "description": "Dictionary of defined metrics included in this time series, keyed by metric slug.",
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "defined_metric.json"
+      }
+    },
+    "owner_gid": {
+      "description": "The GID of the entity that owns this time series data.",
+      "type": ["null", "string"],
+      "format": "uuid"
+    },
+    "source_gid": {
+      "description": "The GID of the entity that is the source of this time series data.",
+      "type": "string",
+      "format": "uuid"
+    },
+    "publisher_gid": {
+      "description": "The GID of the entity that published this time series data.",
+      "type": ["null", "string"],
+      "format": "uuid"
+    },
+    "publication_gid": {
+      "description": "The GID of the specific publication this time series belongs to, if any.",
+      "type": ["null", "string"],
+      "format": "uuid"
+    },
+    "dimensions": {
+      "description": "Additional (generic) dimensions for the time series.",
+      "type": ["null", "object"],
+      "additionalProperties": { "type": "string" }
+    },
+    "tags": {
+      "description": "Additional tags for the time series.",
+      "type": ["null", "array"],
+      "items": { "type": "string" }
+    },
+    "flags": {
+      "description": "Additional boolean flags for the time series.",
+      "type": ["null", "object"],
+      "additionalProperties": { "type": "boolean" }
+    },
+    "metric_gid": {
+        "description": "Map of metric slugs to their GIDs, if they are also managed as separate entities.",
+        "type": ["null", "object"],
+        "additionalProperties": {"type": "string", "format": "uuid"}
+    },
+    "properties": {
+      "description": "Additional properties for the time series.",
+      "type": ["null", "object"],
+      "additionalProperties": { "type": "string" }
+    },
+    "access": {
+      "description": "Access type for the time series.",
+      "type": "string",
+      "enum": ["Local", "Exclusive", "Group", "SharedPercentiles", "SharedObfuscated", "Shared", "Public"],
+      "default": "Public"
+    },
+    "uom": {
+        "description": "Primary or default unit of measure for the entire series, if applicable.",
+        "type": ["null", "string"]
+    },
+    "datapoints": {
+      "description": "The data points of the time series. Actual data points will be defined in data_point.json, this is a placeholder if we embed.",
+      "type": "array",
+      "items": {
+        "$ref": "data_point.json"
+      }
+    }
+  },
+  "required": [
+    "gid_url",
+    "label",
+    "slug",
+    "metrics",
+    "source_gid"
+  ]
+}

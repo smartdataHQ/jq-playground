@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://contextsuite.com/schemas/content_schema.json",
+  "title": "Content",
+  "description": "Schema for a content item associated with an entity.",
+  "type": "object",
+  "properties": {
+    "label": {
+      "description": "The label of the content (e.g., 'Prologue', 'Synopsis', 'Description', 'Summary', 'Conditions', 'History', 'Other').",
+      "type": "string"
+    },
+    "type": {
+      "description": "Type of the content, e.g., Description, Summary. SQL Enum8('Description'=1, 'Summary'=2, 'Conditions'=3, 'History'=4, 'Other'=0)",
+      "type": "string"
+    },
+    "sub_type": {
+      "description": "Sub-type of the content, e.g., short, long. SQL Enum8('short'=1, 'long'=2, 'other'=0)",
+      "type": ["null", "string"]
+    },
+    "value": {
+      "description": "The actual content value.",
+      "type": "string"
+    },
+    "language": {
+      "description": "The primary language of the content (2 letter ISO code).",
+      "type": ["null", "string"]
+    },
+    "meta_description": {
+      "description": "A description of the content's purpose and potentially a few questions it may answer.",
+      "type": ["null", "string"]
+    }
+  },
+  "required": [
+    "label",
+    "type",
+    "value"
+  ]
+}

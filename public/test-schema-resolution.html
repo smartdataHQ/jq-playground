@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Schema Reference Resolution</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        h1, h2 {
+            color: #333;
+        }
+        .test-section {
+            margin-bottom: 20px;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        button {
+            padding: 8px 12px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-right: 10px;
+            margin-bottom: 10px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        pre {
+            background-color: #f5f5f5;
+            padding: 10px;
+            border-radius: 5px;
+            overflow: auto;
+            max-height: 400px;
+        }
+        .result {
+            margin-top: 10px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            min-height: 100px;
+        }
+        .success {
+            color: green;
+            font-weight: bold;
+        }
+        .error {
+            color: red;
+            font-weight: bold;
+        }
+        .info {
+            color: blue;
+        }
+    </style>
+</head>
+<body>
+    <h1>Test Schema Reference Resolution</h1>
+    
+    <div class="test-section">
+        <h2>Test Schema Loading</h2>
+        <p>This test will load the schema files from the public/schema directory and verify that they can be properly loaded.</p>
+        <button onclick="testSchemaLoading('semantic_event.json')">Test Semantic Event Schema</button>
+        <button onclick="testSchemaLoading('product.json')">Test Product Schema</button>
+        <div id="loading-result" class="result"></div>
+    </div>
+
+    <div class="test-section">
+        <h2>Test Schema Reference Resolution</h2>
+        <p>This test will load the schema files and resolve all references in them.</p>
+        <button onclick="testSchemaReferenceResolution('semantic_event.json')">Test Semantic Event Schema References</button>
+        <button onclick="testSchemaReferenceResolution('product.json')">Test Product Schema References</button>
+        <div id="resolution-result" class="result"></div>
+    </div>
+
+    <div class="test-section">
+        <h2>Test Monaco Editor Integration</h2>
+        <p>This test will verify that the Monaco editor can properly validate JSON against the schema.</p>
+        <button onclick="testMonacoIntegration('semantic_event.json')">Test Semantic Event Schema in Monaco</button>
+        <button onclick="testMonacoIntegration('product.json')">Test Product Schema in Monaco</button>
+        <div id="monaco-result" class="result"></div>
+    </div>
+
+    <script>
+        // Test schema loading
+        async function testSchemaLoading(schemaFile) {
+            const resultElement = document.getElementById('loading-result');
+            resultElement.innerHTML = '<p class="info">Loading schema...</p>';
+            
+            try {
+                const response = await fetch(`/schema/${schemaFile}`);
+                if (!response.ok) {
+                    throw new Error(`Failed to fetch schema: ${response.status} ${response.statusText}`);
+                }
+                
+                const schema = await response.json();
+                resultElement.innerHTML = `
+                    <p class="success">Schema loaded successfully!</p>
+                    <p>Schema ID: ${schema.$id || 'No $id specified'}</p>
+                    <p>Schema version: ${schema.$schema || 'No $schema specified'}</p>
+                    <p>References found: ${countReferences(schema)}</p>
+                    <pre>${JSON.stringify(schema, null, 2).substring(0, 500)}...</pre>
+                `;
+                
+                console.log(`Schema ${schemaFile} loaded successfully:`, schema);
+            } catch (error) {
+                resultElement.innerHTML = `<p class="error">Error: ${error.message}</p>`;
+                console.error(`Error loading schema ${schemaFile}:`, error);
+            }
+        }
+        
+        // Test schema reference resolution
+        async function testSchemaReferenceResolution(schemaFile) {
+            const resultElement = document.getElementById('resolution-result');
+            resultElement.innerHTML = '<p class="info">Resolving schema references...</p>';
+            
+            try {
+                // First load the schema
+                const response = await fetch(`/schema/${schemaFile}`);
+                if (!response.ok) {
+                    throw new Error(`Failed to fetch schema: ${response.status} ${response.statusText}`);
+                }
+                
+                const schema = await response.json();
+                
+                // Then resolve references manually
+                const baseUrl = `${window.location.origin}/schema/`;
+                const resolvedSchema = await resolveReferences(schema, baseUrl);
+                
+                resultElement.innerHTML = `
+                    <p class="success">Schema references resolved successfully!</p>
+                    <p>Original references: ${countReferences(schema)}</p>
+                    <p>Remaining references: ${countReferences(resolvedSchema)}</p>
+                    <pre>${JSON.stringify(resolvedSchema, null, 2).substring(0, 500)}...</pre>
+                `;
+                
+                console.log(`Schema ${schemaFile} references resolved successfully:`, resolvedSchema);
+            } catch (error) {
+                resultElement.innerHTML = `<p class="error">Error: ${error.message}</p>`;
+                console.error(`Error resolving schema references ${schemaFile}:`, error);
+            }
+        }
+        
+        // Test Monaco editor integration
+        async function testMonacoIntegration(schemaFile) {
+            const resultElement = document.getElementById('monaco-result');
+            resultElement.innerHTML = '<p class="info">Testing Monaco integration...</p>';
+            
+            resultElement.innerHTML = `
+                <p class="info">Monaco editor integration test not implemented yet.</p>
+                <p>This would require loading the Monaco editor and testing validation against the schema.</p>
+            `;
+        }
+        
+        // Count references in a schema
+        function countReferences(schema) {
+            let count = 0;
+            
+            function traverse(node) {
+                if (typeof node !== 'object' || node === null) {
+                    return;
+                }
+                
+                if (Array.isArray(node)) {
+                    for (const item of node) {
+                        traverse(item);
+                    }
+                    return;
+                }
+                
+                if ('$ref' in node && typeof node.$ref === 'string') {
+                    count++;
+                }
+                
+                for (const key in node) {
+                    traverse(node[key]);
+                }
+            }
+            
+            traverse(schema);
+            return count;
+        }
+        
+        // Simple reference resolution function for testing
+        async function resolveReferences(schema, baseUrl) {
+            // Clone the schema to avoid modifying the original
+            const resolvedSchema = JSON.parse(JSON.stringify(schema));
+            
+            // Process the schema recursively
+            await processNode(resolvedSchema, baseUrl);
+            
+            return resolvedSchema;
+            
+            async function processNode(node, baseUrl) {
+                if (typeof node !== 'object' || node === null) {
+                    return;
+                }
+                
+                if (Array.isArray(node)) {
+                    for (let i = 0; i < node.length; i++) {
+                        await processNode(node[i], baseUrl);
+                    }
+                    return;
+                }
+                
+                if ('$ref' in node && typeof node.$ref === 'string') {
+                    const ref = node.$ref;
+                    
+                    // Skip JSON Schema references
+                    if (ref.startsWith('http://json-schema.org/') || ref.startsWith('https://json-schema.org/')) {
+                        return;
+                    }
+                    
+                    try {
+                        // Resolve the reference URL
+                        let refUrl;
+                        if (ref.startsWith('http://') || ref.startsWith('https://')) {
+                            refUrl = ref;
+                        } else {
+                            refUrl = new URL(ref, baseUrl).toString();
+                        }
+                        
+                        console.log(`Resolving reference: ${ref} -> ${refUrl}`);
+                        
+                        // Fetch the referenced schema
+                        const response = await fetch(refUrl);
+                        if (!response.ok) {
+                            throw new Error(`Failed to fetch referenced schema: ${response.status} ${response.statusText}`);
+                        }
+                        
+                        const refSchema = await response.json();
+                        
+                        // Replace the $ref with the actual schema properties
+                        delete node.$ref;
+                        Object.assign(node, refSchema);
+                        
+                        // Process the newly added properties
+                        await processNode(node, baseUrl);
+                    } catch (error) {
+                        console.error(`Error resolving reference ${ref}:`, error);
+                        // Keep the $ref in case of error
+                    }
+                    return;
+                }
+                
+                for (const key in node) {
+                    await processNode(node[key], baseUrl);
+                }
+            }
+        }
+    </script>
+</body>
+</html>

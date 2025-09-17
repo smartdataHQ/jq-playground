@@ -1,0 +1,107 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://contextsuite.com/schemas/location_schema.json",
+  "title": "Location",
+  "description": "Schema for location information, usable for entities and events.",
+  "type": "object",
+  "properties": {
+    "type": {
+      "description": "The type of the location (e.g., 'Home', 'Work', 'Venue', 'Address', 'Geographic', 'Permanent', 'Temporary', 'Other'). Used primarily for entity locations.",
+      "type": ["null", "string"]
+    },
+    "location_of": {
+      "description": "Describes what the location pertains to (e.g., 'Customer', 'Supplier', 'Postal Address', 'Business Address', 'Home Address', 'Other'). Used primarily for event locations.",
+      "type": "string"
+    },
+    "label": {
+      "description": "A readable label for the location (e.g., 'Street name 1, 1234').",
+      "type": "string"
+    },
+    "country": {
+      "description": "The country of the location (e.g., 'France', 'United States', 'Germany'). Should be in English, singular form, and capitalized.",
+      "type": "string"
+    },
+    "country_code": {
+      "description": "The 3-letter country code of the location (e.g., 'FRA', 'USA', 'DEU'). Should be in uppercase.",
+      "type": "string"
+    },
+    "code": {
+      "description": "A code for the location, which could be a postal code or other area identifier (e.g., '75001', '10001', '10115'). Should be in uppercase. Note: `postal_code` is a separate field if specifically a postal code.",
+      "type": "string"
+    },
+    "region": {
+      "description": "The region of the location (e.g., 'Île-de-France', 'New York', 'Berlin'). Should be in English, singular form, and capitalized.",
+      "type": "string"
+    },
+    "division": {
+      "description": "The division of the location (e.g., 'Paris', 'Manhattan', 'Mitte'). Should be in English, singular form, and capitalized.",
+      "type": "string"
+    },
+    "municipality": {
+      "description": "The municipality of the location (e.g., 'Paris', 'New York', 'Berlin'). Should be in English, singular form, and capitalized.",
+      "type": "string"
+    },
+    "locality": {
+      "description": "The locality or neighbourhood of the location (e.g., 'Montmartre', 'SoHo', 'Kreuzberg'). Should be in English, singular form, and capitalized.",
+      "type": "string"
+    },
+    "postal_code": {
+      "description": "The postal code of the location (e.g., '75001', '10001', '10115'). Should be in uppercase.",
+      "type": "string"
+    },
+    "postal_name": {
+      "description": "The name of the postal code area (e.g., '1er Arrondissement', 'Chelsea', 'Mitte'). Should be in English, singular form, and capitalized.",
+      "type": "string"
+    },
+    "street": {
+      "description": "The street of the location (e.g., 'Rue de Rivoli', 'Broadway', 'Friedrichstraße'). Should be in English, singular form, and capitalized.",
+      "type": "string"
+    },
+    "street_nr": {
+      "description": "The street number of the location (e.g., '1', '100', '15'). Should be in uppercase.",
+      "type": ["null", "string"]
+    },
+    "address": {
+      "description": "The full address of the location (e.g., '1 Rue de Rivoli, 75001 Paris, France'). Should be in English, singular form, and capitalized.",
+      "type": ["null", "string"]
+    },
+    "longitude": {
+      "description": "The longitude of the location (e.g., 2.3364, -74.0060, 13.3889).",
+      "type": ["null", "number"],
+      "format": "double"
+    },
+    "latitude": {
+      "description": "The latitude of the location (e.g., 48.8606, 40.7128, 52.5166).",
+      "type": ["null", "number"],
+      "format": "double"
+    },
+    "geohash": {
+      "description": "The geohash of the location (e.g., 'u09t2', 'dqcjq', 's9z6x'). Should be in lowercase.",
+      "type": ["null", "string"]
+    },
+    "duration_from": {
+      "description": "The start date/timestamp from which the location is valid (e.g., '2023-01-01T00:00:00Z'). Used if the location is temporary.",
+      "type": ["null", "string"],
+      "format": "date-time"
+    },
+    "duration_until": {
+      "description": "The end date/timestamp until which the location is valid (e.g., '2023-12-31T23:59:59Z'). Used if the location is temporary.",
+      "type": ["null", "string"],
+      "format": "date-time"
+    }
+  },
+  "required": [
+    "label",
+    "location_of",
+    "country",
+    "country_code",
+    "code",
+    "region",
+    "division",
+    "municipality",
+    "locality",
+    "postal_code",
+    "postal_name",
+    "street"
+  ]
+}

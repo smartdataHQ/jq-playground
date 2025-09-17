@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://contextsuite.com/schemas/context_schema.json",
+  "title": "Context",
+  "description": "Schema for general context information of a semantic event.",
+  "type": "object",
+  "properties": {
+    "active": { "type": ["null", "boolean"], "description": "Whether the library/client is active (e.g., true, often represented as 1 in source data)." },
+    "ip": { "type": ["null", "string"], "format": "ipv4", "description": "IPv4 address of the client." },
+    "ipv6": { "type": ["null", "string"], "format": "ipv6", "description": "IPv6 address of the client." },
+    "locale": { "type": "string", "description": "The locale string used where the event happened (e.g., 'en-US')." },
+    "group_id": { "type": "string", "description": "The group ID associated with the event, if any (e.g., 'a89d88da-4f4b-11e5-9e98-2f3c942e34c8')." },
+    "timezone": { "type": "string", "description": "The timezone in which the event happened (e.g., 'America/Los_Angeles')." },
+    "location": {
+      "type": "array",
+      "items": { "type": "number", "format": "double" },
+      "minItems": 2,
+      "maxItems": 2,
+      "description": "Geographic location associated with the event, typically as [longitude, latitude] (e.g., [-122.5776844, 37.7576171]). Note: SQL source might use a Point type."
+    },
+    "region": { "type": ["null", "string"], "description": "Deployment region or similar (e.g., 'AWS-West')." },
+    "namespace": { "type": ["null", "string"], "description": "Kubernetes namespace where the event originated." },
+    "hostname": { "type": ["null", "string"], "description": "Hostname of the server where the event originated." },
+    "pod": { "type": ["null", "string"], "description": "Kubernetes pod name where the event originated." },
+    "extras": { "type": "string", "description": "Other context properties of the event that cannot be mapped to standard fields or have complex data types. Often a JSON string or stringified object." }
+  },
+  "required": [
+    "locale",
+    "group_id",
+    "timezone",
+    "location",
+    "extras"
+  ],
+  "additionalProperties": false
+}

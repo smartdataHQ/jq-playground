@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://contextsuite.com/cxs_schema.json",
+  "title": "XCSRoot",
+  "description": "Root schema for all ContextSuite data types. It references individual schemas for entities, semantic events, etc.",
+  "type": "object",
+  "properties": {
+    "entity": {
+      "$ref": "entity.json",
+      "description": "Schema definition for a ContextSuite Entity."
+    },
+    "semantic_event": {
+      "$ref": "semantic_event.json",
+      "description": "Schema definition for a ContextSuite Semantic Event."
+    },
+    "time_series": {
+      "$ref": "timeseries.json",
+      "description": "Schema definition for a ContextSuite Time Series."
+    },
+    "data_point": {
+      "$ref": "data_point.json",
+      "description": "Schema definition for an individual Data Point within a Time Series."
+    },
+    "uom": {
+      "$ref": "uom.json",
+      "description": "Schema definition for a Unit of Measure (UOM)."
+    }
+  }
+}

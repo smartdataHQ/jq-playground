@@ -1,0 +1,21 @@
+# Product inventory analysis
+# Calculate value and availability metrics
+.products 
+| map(
+  {
+    name, 
+    price, 
+    inventory_value: (.price * .quantity),
+    availability: if .inStock then ("In Stock (" + (.quantity | tostring) + " units)") else "Out of Stock" end,
+    popularity: {
+      rating,
+      review_count: .reviews,
+      sentiment: if .rating >= 4.5 then "Excellent" 
+                 elif .rating >= 4.0 then "Very Good" 
+                 elif .rating >= 3.0 then "Good" 
+                 else "Average" end
+    },
+    tags
+  }
+)
+| sort_by(.inventory_value) | reverse

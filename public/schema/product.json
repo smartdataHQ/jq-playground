@@ -1,0 +1,419 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://contextsuite.com/schemas/product_schema.json",
+  "title": "Product",
+  "description": "Schema for a product within a commerce event.",
+  "type": "object",
+  "properties": {
+    "position": {
+      "description": "Position of the product in a list of products (e.g., in a cart or order).",
+      "type": [
+        "null",
+        "integer"
+      ]
+    },
+    "entry_type": {
+      "description": "Type of line item, if applicable (e.g., 'Cart Item', 'Line Item', 'Wishlist', 'Recommendation', 'Purchase Order', 'Search Results', 'Delivery', 'Reservation', 'Stockout', 'Product Definition', 'Other').",
+      "type": "string"
+    },
+    "line_id": {
+      "description": "Unique ID for the line item.",
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "product_id": {
+      "description": "Database id of the product being purchases. External ID by the customer (e.g., '507f1f77bcf86cd799439011').",
+      "type": "string"
+    },
+    "entity_gid": {
+      "description": "Database id of the product being purchases. A GID id for the product if it exists. The Graph UUID (GID) of the product entity, if this product is represented as an entity in ContextSuite.",
+      "type": [
+        "null",
+        "string"
+      ],
+      "format": "uuid"
+    },
+    "sku": {
+      "description": "Sku of the product being purchased. Store-Native ID of the product. It may varie between stores in a chain (e.g., '45790-32').",
+      "type": "string"
+    },
+    "barcode": {
+      "description": "Barcode of the product being purchased.",
+      "type": "string"
+    },
+    "gtin": {
+      "description": "GTIN (Global Trade Item Number) of the product.",
+      "type": "string"
+    },
+    "upc": {
+      "description": "UPC (Universal Product Code) of the product.",
+      "type": "string"
+    },
+    "ean": {
+      "description": "EAN (European Article Number) of the product.",
+      "type": "string"
+    },
+    "isbn": {
+      "description": "ISBN (International Standard Book Number) of the product.",
+      "type": "string"
+    },
+    "serial_number": {
+      "description": "Serial number of the product.",
+      "type": "string"
+    },
+    "supplier_number": {
+      "description": "Supplier number for the product.",
+      "type": "string"
+    },
+    "tpx_serial_number": {
+      "description": "TPX serial number for the product (specific to some industries).",
+      "type": "string"
+    },
+    "bundle_id": {
+      "description": "ID of the bundle this product belongs to, if applicable.",
+      "type": "string"
+    },
+    "bundle": {
+      "description": "Name of the bundle this product belongs to (e.g., 'Starter Pack').",
+      "type": "string"
+    },
+    "product": {
+      "description": "Name of the product (e.g., 'Monopoly: 3rd Edition').",
+      "type": "string"
+    },
+    "variant": {
+      "description": "Variant of the product (e.g., 'Red', 'XL').",
+      "type": "string"
+    },
+    "novelty": {
+      "description": "Novelty status or type of the product (e.g., 'New', 'Refurbished', 'Limited Edition').",
+      "type": "string"
+    },
+    "size": {
+      "description": "Size of the product (e.g., 'XL', '100ml').",
+      "type": "string"
+    },
+    "packaging": {
+      "description": "Packaging type of the product (e.g., 'Box', 'Bottle', 'Bag').",
+      "type": "string"
+    },
+    "condition": {
+      "description": "Condition of the product (e.g., 'New', 'Used', 'Refurbished', 'Damaged', 'Sample', 'Expired', 'Recalled', 'Returned', 'Other').",
+      "type": "string"
+    },
+    "ready_for_use": {
+      "description": "Indicates if the product is ready for use (e.g., true for a pre-assembled item, false for an item requiring setup).",
+      "type": [
+        "null",
+        "boolean"
+      ]
+    },
+    "core_product": {
+      "description": "Core product identifier or name, if this product is part of a larger offering (e.g., 'iPhone' for an 'iPhone 13 Pro Max 256GB Sierra Blue').",
+      "type": "string"
+    },
+    "origin": {
+      "description": "Origin of the product (e.g., country of manufacture, 'Organic', 'Fair Trade').",
+      "type": "string"
+    },
+    "brand": {
+      "description": "Brand name of the product (e.g., 'Apple', 'Google').",
+      "type": "string"
+    },
+    "product_line": {
+      "description": "Product line the product belongs to (e.g., 'iPhone', 'Pixel').",
+      "type": "string"
+    },
+    "own_product": {
+      "description": "Indicates if this is an own-brand product (e.g., true if the seller is also the brand).",
+      "type": [
+        "null",
+        "boolean"
+      ]
+    },
+    "product_dist": {
+      "description": "Distribution channel or type for the product (e.g., 'Retail', 'Online', 'Wholesale', 'Direct Sale', 'Reseller', 'Marketplace', 'Other').",
+      "type": "string"
+    },
+    "main_category": {
+      "description": "Main category of the product (e.g., 'Games').",
+      "type": "string"
+    },
+    "main_category_id": {
+      "description": "ID of the main category.",
+      "type": "string"
+    },
+    "category": {
+      "description": "Sub-category of the product (e.g., 'Board Games').",
+      "type": "string"
+    },
+    "category_id": {
+      "description": "ID of the sub-category.",
+      "type": "string"
+    },
+    "categories": {
+      "description": "List of additional categories the product belongs to, if applicable.",
+      "type": [
+        "null",
+        "array"
+      ],
+      "items": {
+        "type": "string"
+      }
+    },
+    "gs1_brick_id": {
+      "description": "GS1 Global Product Classification (GPC) Brick ID (e.g., '10000000').",
+      "type": "string"
+    },
+    "gs1_brick": {
+      "description": "GS1 GPC Brick description (e.g., 'Toys/Games (Non-Powered)').",
+      "type": "string"
+    },
+    "gs1_brick_short": {
+      "description": "Short description for the GS1 GPC Brick.",
+      "type": "string"
+    },
+    "gs1_brick_variant": {
+      "description": "Variant of the GS1 GPC Brick.",
+      "type": "string"
+    },
+    "gs1_conditions": {
+      "description": "GS1 GPC Brick Conditions (e.g., 'New', 'Used').",
+      "type": "string"
+    },
+    "gs1_processed": {
+      "description": "GS1 GPC Brick Processed Status (e.g., 'Raw', 'Processed').",
+      "type": "string"
+    },
+    "gs1_consumable": {
+      "description": "GS1 Brick Consumable Status (e.g., 'Yes', 'No').",
+      "type": "string"
+    },
+    "gs1_class": {
+      "description": "GS1 GPC Class description (e.g., 'Traditional Games').",
+      "type": "string"
+    },
+    "gs1_family": {
+      "description": "GS1 GPC Family description (e.g., 'Board Games/Puzzles').",
+      "type": "string"
+    },
+    "gs1_segment": {
+      "description": "GS1 GPC Segment description (e.g., 'Toys/Games').",
+      "type": "string"
+    },
+    "starts": {
+      "description": "Start date/time for a service or subscription product.",
+      "type": [
+        "null",
+        "string"
+      ],
+      "format": "date-time"
+    },
+    "ends": {
+      "description": "End date/time for a service or subscription product.",
+      "type": [
+        "null",
+        "string"
+      ],
+      "format": "date-time"
+    },
+    "duration": {
+      "description": "Duration of the service or subscription in a standardized unit (e.g., days, months).",
+      "type": [
+        "null",
+        "number"
+      ],
+      "format": "float"
+    },
+    "seats": {
+      "description": "Number of seats or users for a service or subscription product.",
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "destination": {
+      "description": "Destination for a travel product (e.g., 'Paris', 'London').",
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "lead_time": {
+      "description": "Lead time for the product in days (e.g., for shipping or manufacturing).",
+      "type": [
+        "null",
+        "number"
+      ],
+      "format": "float"
+    },
+    "dwell_time_ms": {
+      "description": "Dwell time in milliseconds, often used for product views or interactions.",
+      "type": [
+        "null",
+        "integer"
+      ]
+    },
+    "supplier": {
+      "description": "Name of the supplier.",
+      "type": "string"
+    },
+    "supplier_id": {
+      "description": "ID of the supplier.",
+      "type": "string"
+    },
+    "manufacturer": {
+      "description": "Name of the manufacturer.",
+      "type": "string"
+    },
+    "manufacturer_id": {
+      "description": "ID of the manufacturer.",
+      "type": "string"
+    },
+    "promoter": {
+      "description": "Name of the promoter or affiliate.",
+      "type": "string"
+    },
+    "promoter_id": {
+      "description": "ID of the promoter or affiliate.",
+      "type": "string"
+    },
+    "product_mgr_id": {
+      "description": "ID of the product manager.",
+      "type": "string"
+    },
+    "product_mgr": {
+      "description": "Name of the product manager.",
+      "type": "string"
+    },
+    "units": {
+      "description": "Number of units of the product (e.g., quantity).",
+      "type": [
+        "null",
+        "number"
+      ],
+      "format": "double"
+    },
+    "unit_size": {
+      "description": "Size of a single unit (e.g., 250 for 250ml).",
+      "type": [
+        "null",
+        "number"
+      ],
+      "format": "double"
+    },
+    "uom": {
+      "description": "Unit of measure for the product (e.g., 'ml', 'kg', 'piece').",
+      "type": "string"
+    },
+    "unit_price": {
+      "description": "Price per unit of the product.",
+      "type": [
+        "null",
+        "number"
+      ],
+      "format": "double"
+    },
+    "unit_cost": {
+      "description": "Cost per unit of the product.",
+      "type": [
+        "null",
+        "number"
+      ],
+      "format": "double"
+    },
+    "bundled_units": {
+      "description": "Number of individual items in a bundle.",
+      "type": [
+        "null",
+        "integer"
+      ]
+    },
+    "price_bracket": {
+      "description": "Price bracket or tier for the product (e.g., 'Budget', 'Premium').",
+      "type": "string"
+    },
+    "income_category": {
+      "description": "Income category or revenue type for the product (e.g., 'New Sales', 'Renewal', 'Upgrade').",
+      "type": "string"
+    },
+    "tax_percentage": {
+      "description": "Tax percentage applied to the product (e.g., 0.2 for 20% tax).",
+      "type": [
+        "null",
+        "number"
+      ],
+      "format": "float"
+    },
+    "discount_percentage": {
+      "description": "Discount percentage applied to the product (e.g., 0.1 for 10% discount).",
+      "type": [
+        "null",
+        "number"
+      ],
+      "format": "float"
+    },
+    "kickback_percentage": {
+      "description": "Kickback percentage associated with the product sale (e.g., for affiliates or partners).",
+      "type": [
+        "null",
+        "number"
+      ],
+      "format": "float"
+    },
+    "commission": {
+      "description": "Commission amount or percentage for the product sale.",
+      "type": [
+        "null",
+        "number"
+      ],
+      "format": "float"
+    },
+    "coupon": {
+      "description": "Coupon code used for the product (e.g., 'PRODUCT10').",
+      "type": "string"
+    },
+    "scale_item": {
+      "description": "Indicates if the item is sold by weight or measure (e.g., true for items sold by kg at a deli counter).",
+      "type": [
+        "null",
+        "boolean"
+      ]
+    },
+    "price_changed": {
+      "description": "Indicates if the price was manually changed or overridden (e.g., true if a cashier entered a different price).",
+      "type": [
+        "null",
+        "boolean"
+      ]
+    },
+    "line_discounted": {
+      "description": "Indicates if the line item was discounted (e.g., true if a discount was applied specifically to this product).",
+      "type": [
+        "null",
+        "boolean"
+      ]
+    },
+    "url": {
+      "description": "URL of the product page (e.g., 'https://www.example.com/product/monopoly').",
+      "type": "string",
+      "format": "uri"
+    },
+    "img_url": {
+      "description": "URL of an image of the product (e.g., 'https://www.example.com/images/monopoly.jpg').",
+      "type": "string",
+      "format": "uri"
+    }
+  },
+  "required": [
+    "entry_type",
+    "product_id",
+    "sku",
+    "product",
+    "unit_price",
+    "uom"
+  ],
+  "additionalProperties": false
+}

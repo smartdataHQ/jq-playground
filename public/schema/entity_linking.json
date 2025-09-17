@@ -1,0 +1,46 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://contextsuite.com/schemas/entity_linking_schema.json",
+  "title": "Entity Linking",
+  "description": "Schema for an entity linking reference in a semantic event.",
+  "type": "object",
+  "properties": {
+    "content_key": {
+      "description": "Key of the content text where the entity was found (e.g., 'body', 'subject', 'title', 'description', 'summary', 'quick response', 'other').",
+      "type": "string"
+    },
+    "label": {
+      "description": "The textual mention of the entity in the content.",
+      "type": ["null", "string"]
+    },
+    "starts_at": {
+      "description": "The start index of the entity mention in the content.",
+      "type": ["null", "integer"]
+    },
+    "ends_at": {
+      "description": "The end index of the entity mention in the content.",
+      "type": ["null", "integer"]
+    },
+    "entity_type": {
+      "description": "The type of the linked entity (e.g., 'Person', 'Organization', 'LegalEntity').",
+      "type": ["null", "string"]
+    },
+    "entity_gid": {
+      "description": "The Graph UUID of the linked entity.",
+      "type": ["null", "string"],
+      "format": "uuid"
+    },
+    "entity_wid": {
+      "description": "The Wikidata ID of the linked entity.",
+      "type": ["null", "string"]
+    },
+    "certainty": {
+      "description": "The certainty score of the entity linking.",
+      "type": ["null", "number"],
+      "format": "double"
+    }
+  },
+  "required": [
+    "content_key"
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://contextsuite.com/schemas/referrer_schema.json",
+  "title": "Referrer",
+  "description": "Schema for referrer information.",
+  "type": "object",
+  "properties": {
+    "id": { "type": "string", "description": "The referrer ID (e.g., '3c8da4a4-4f4b-11e5-9e98-2f3c942e34c8')." },
+    "type": { "type": "string", "description": "The referrer type (e.g., 'dataxu')." }
+  },
+  "required": [
+    "id",
+    "type"
+  ],
+  "additionalProperties": false
+}

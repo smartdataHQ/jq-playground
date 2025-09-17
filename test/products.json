@@ -1,0 +1,71 @@
+{
+  "products": [
+    {
+      "id": "p001",
+      "name": "Wireless Headphones",
+      "price": 89.99,
+      "category": "Electronics",
+      "brand": "AudioTech",
+      "inStock": true,
+      "quantity": 150,
+      "rating": 4.5,
+      "reviews": 1247,
+      "tags": ["wireless", "bluetooth", "music"],
+      "specs": {
+        "color": "Black",
+        "batteryLife": "30 hours",
+        "connectivity": ["Bluetooth 5.0", "3.5mm jack"],
+        "weight": "250g"
+      },
+      "images": [
+        "https://images.pexels.com/photos/3945683/pexels-photo-3945683.jpeg",
+        "https://images.pexels.com/photos/3394650/pexels-photo-3394650.jpeg"
+      ]
+    },
+    {
+      "id": "p002",
+      "name": "Smart Watch",
+      "price": 199.99,
+      "category": "Electronics",
+      "brand": "TechTime",
+      "inStock": true,
+      "quantity": 75,
+      "rating": 4.2,
+      "reviews": 892,
+      "tags": ["smartwatch", "fitness", "health"],
+      "specs": {
+        "color": "Silver",
+        "batteryLife": "7 days",
+        "waterproof": "IP68",
+        "display": "1.4 inch OLED"
+      },
+      "images": [
+        "https://images.pexels.com/photos/437037/pexels-photo-437037.jpeg"
+      ]
+    },
+    {
+      "id": "p003",
+      "name": "Coffee Mug",
+      "price": 12.99,
+      "category": "Home",
+      "brand": "CupCraft",
+      "inStock": false,
+      "quantity": 0,
+      "rating": 4.8,
+      "reviews": 156,
+      "tags": ["ceramic", "dishwasher-safe", "gift"],
+      "specs": {
+        "color": "White",
+        "capacity": "350ml",
+        "material": "Ceramic",
+        "microwaveSafe": true
+      },
+      "images": [
+        "https://images.pexels.com/photos/302899/pexels-photo-302899.jpeg"
+      ]
+    }
+  ],
+  "categories": ["Electronics", "Home", "Fashion", "Sports"],
+  "totalProducts": 3,
+  "lastSync": "2024-01-15T14:22:00Z"
+}

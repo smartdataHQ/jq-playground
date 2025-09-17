@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://contextsuite.com/schemas/device_schema.json",
+  "title": "Device",
+  "description": "Schema for device information related to a semantic event.",
+  "type": "object",
+  "properties": {
+    "ad_tracking_enabled": { "type": ["null", "boolean"], "description": "Whether ad tracking is enabled (e.g., true)." },
+    "id": { "type": "string", "description": "The manufacturer ID for the device (e.g., 'e3bcf3f796b9f377284bfbfbcf1f8f92b6')." },
+    "version": { "type": "string", "description": "The device version (e.g., '9.1')." },
+    "mac_address": { "type": "string", "description": "The device MAC address (e.g., '00:00:00:00:00:00')." },
+    "manufacturer": { "type": "string", "description": "Device manufacturer (e.g., 'Apple')." },
+    "model": { "type": "string", "description": "Device model (e.g., 'iPhone 6')." },
+    "name": { "type": "string", "description": "Device name (e.g., 'Nexus 5')." },
+    "type": { "type": "string", "description": "The type of the device (e.g., 'Mobile', 'Tablet', 'Desktop', 'TV', 'Wearable', 'Other')." },
+    "token": { "type": "string", "description": "Device token, often used for push notifications (e.g., 'e3bcf3f796b9f377284bfbfbcf1f8f92b6')." },
+    "locale": { "type": "string", "description": "Locale of the device (e.g., 'en-US')." },
+    "timezone": { "type": "string", "description": "Timezone of the device (e.g., 'America/Los_Angeles')." },
+    "brand": { "type": "string", "description": "Device brand (often same as manufacturer)." },
+    "variant": { "type": "string", "description": "Device variant (e.g., 'iPhone 6s')." },
+    "advertising_id": { "type": "string", "description": "The advertising ID of the device (e.g., '350e9d90-d7f5-11e4-b9d6-1681e6b88ec1')." }
+  },
+  "required": [
+    "id",
+    "version",
+    "mac_address",
+    "manufacturer",
+    "brand",
+    "model",
+    "variant",
+    "name",
+    "type",
+    "token",
+    "locale",
+    "timezone",
+    "advertising_id"
+  ],
+  "additionalProperties": false
+}

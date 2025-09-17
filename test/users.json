@@ -1,0 +1,66 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "name": "Alice Johnson",
+      "email": "alice@example.com",
+      "age": 28,
+      "city": "New York",
+      "role": "developer",
+      "skills": ["JavaScript", "React", "Node.js"],
+      "active": true,
+      "joinDate": "2023-01-15",
+      "profile": {
+        "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=Alice",
+        "bio": "Full-stack developer with 5 years of experience",
+        "social": {
+          "github": "alice-dev",
+          "linkedin": "alice-johnson"
+        }
+      }
+    },
+    {
+      "id": 2,
+      "name": "Bob Smith",
+      "email": "bob@example.com",
+      "age": 32,
+      "city": "San Francisco",
+      "role": "designer",
+      "skills": ["Figma", "Sketch", "Adobe XD"],
+      "active": true,
+      "joinDate": "2022-11-20",
+      "profile": {
+        "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=Bob",
+        "bio": "UI/UX designer passionate about user experience",
+        "social": {
+          "dribbble": "bob-designs",
+          "behance": "bob-smith"
+        }
+      }
+    },
+    {
+      "id": 3,
+      "name": "Carol Wilson",
+      "email": "carol@example.com",
+      "age": 24,
+      "city": "Austin",
+      "role": "developer",
+      "skills": ["Python", "Django", "PostgreSQL"],
+      "active": false,
+      "joinDate": "2023-06-10",
+      "profile": {
+        "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=Carol",
+        "bio": "Backend developer specializing in Python",
+        "social": {
+          "github": "carol-py",
+          "twitter": "carol_codes"
+        }
+      }
+    }
+  ],
+  "metadata": {
+    "total": 3,
+    "lastUpdated": "2024-01-15T10:30:00Z",
+    "version": "1.0"
+  }
+}

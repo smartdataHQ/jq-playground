@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://contextsuite.com/schemas/library_schema.json",
+  "title": "Library",
+  "description": "Schema for event library information.",
+  "type": "object",
+  "properties": {
+    "name": { "type": "string", "description": "The name of the library (e.g. \"analytics-ios\")." },
+    "version": { "type": "string", "description": "The version of the library (e.g. \"3.0.0\")." }
+  },
+  "required": [
+    "name",
+    "version"
+  ],
+  "additionalProperties": false
+}
