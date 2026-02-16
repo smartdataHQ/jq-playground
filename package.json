@@ -4,10 +4,10 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite && node public/index.js",
-    "build": "vite build && node public/index.js",
+    "dev": "vite && node",
+    "build": "vite build && node",
     "lint": "eslint .",
-    "preview": "vite preview && node public/index.js"
+    "preview": "vite preview && node"
   },
   "dependencies": {
     "@monaco-editor/react": "^4.7.0",
